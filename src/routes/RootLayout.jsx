@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 import { HEADER_HEIGHT } from 'src/components/header/constants';
-import Header from 'src/components/header/Header';
+import HeaderContainer from 'src/containers/HeaderContainer';
 import { FOOTER_HEIGHT } from 'src/components/footer/constants';
 import Footer from 'src/components/footer/Footer';
 
@@ -54,7 +54,7 @@ const RootLayout = () => {
   return (
     <RootLayoutWrapper>
       <LayoutBox>
-        <Header />
+        <HeaderContainer />
         <Body>
           <Outlet />
         </Body>

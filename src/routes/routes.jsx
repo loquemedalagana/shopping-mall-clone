@@ -1,25 +1,32 @@
 import React from 'react';
 
-import ErrorPage from 'src/pages/ErrorPage';
-import HomePage from 'src/pages/HomePage';
-import ProductDetailPage from 'src/pages/ProductDetailPage';
+import ErrorContainer from 'src/containers/ErrorContainer';
+import LandingContainer from 'src/containers/LandingContainer';
+import ProductListContainer from 'src/containers/ProductListContainer';
+import ProductDetailContainer from 'src/containers/ProductDetailContainer';
 import * as routeURL from 'src/routes/routeURL';
 import RootLayout from 'src/routes/RootLayout';
 
 const routes = [
   {
-    path: routeURL.URL_LANDING,
+    path: routeURL.URL_ROOT,
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorContainer />,
     children: [
       {
-        path: routeURL.URL_HOME,
-        element: <HomePage />,
+        path: routeURL.URL_ROOT,
+        element: <LandingContainer />,
       },
       {
-        path: routeURL.PRODUCT_DETAIL,
-        element: <ProductDetailPage />,
+        path: routeURL.URL_PRODUCTS,
+        element: <ProductListContainer />,
+        index: true,
       },
+      {
+        path: routeURL.URL_PRODUCT_DETAIL,
+        element: <ProductDetailContainer />,
+      },
+      { path: routeURL.URL_NOT_FOUND, element: <ErrorContainer /> },
     ],
   },
 ];
