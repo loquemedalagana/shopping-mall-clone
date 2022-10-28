@@ -38,7 +38,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4 # use the explicit version number
         with:
-          spec: cypress/e2e/*.spec.cy.ts
+          spec: cypress/e2e/*.spec.cy.js
           browser: chrome
           build: yarn build
           start: yarn start
