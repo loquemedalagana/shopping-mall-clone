@@ -3,10 +3,10 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'cypress/recommended'],
   overrides: [
     {
-      files: ['**/*.spec.js', '**/*.spec.jsx'],
+      files: ['**/*.spec.js', '**/*.spec.jsx', 'cypress/**/*.spec.cy.js'],
       env: {
         jest: true,
       },
