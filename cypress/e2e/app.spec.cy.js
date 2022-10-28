@@ -1,5 +1,5 @@
 import { URL_LANDING } from '../../src/routes/routeURL';
-import mockedItemDetail from '../../src/__tests__/__mocks__/mockedItemDetail';
+import mockedItemDetail from '../../src/tests/__mocks__/mockedItemDetail';
 
 describe('visit routes', () => {
   it('visit home', () => {
