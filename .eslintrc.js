@@ -20,6 +20,7 @@ module.exports = {
   plugins: ['react', 'cypress'],
   rules: {
     'react/function-component-definition': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
     'arrow-body-style': 'off',
     'no-unused-vars': 'off',

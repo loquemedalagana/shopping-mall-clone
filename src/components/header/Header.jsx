@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+import BreadCrumbs from 'src/components/header/BreadCrumbs';
 import { HEADER_HEIGHT } from 'src/components/header/constants';
 
 const HeaderBox = styled.header`
@@ -33,10 +34,15 @@ const HeaderBody = styled.div`
   align-items: center;
 `;
 
+const HeaderRightSection = styled.div``;
+
 const Header = () => {
   return (
     <HeaderBox>
-      <HeaderBody className="layout-space">hello</HeaderBody>
+      <HeaderBody className="layout-space">
+        <BreadCrumbs />
+        <HeaderRightSection>right section</HeaderRightSection>
+      </HeaderBody>
     </HeaderBox>
   );
 };
