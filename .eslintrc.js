@@ -19,6 +19,8 @@ module.exports = {
   },
   plugins: ['react', 'cypress'],
   rules: {
+    'class-methods-use-this': 'off',
+    'no-underscore-dangle': 'off',
     'react/function-component-definition': 'off',
     'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
