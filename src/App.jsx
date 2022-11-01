@@ -1,16 +1,16 @@
 import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 
-import Header from 'src/components/header/Header';
+import routes from 'src/routes/routes';
 import MuiTheme from 'src/styles/theme';
+
+export const router = createBrowserRouter(routes);
 
 function App() {
   return (
     <ThemeProvider theme={MuiTheme}>
-      <div>
-        <Header />
-        hello react
-      </div>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
