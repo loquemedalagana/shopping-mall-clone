@@ -10,4 +10,11 @@ describe('visit routes', () => {
   it('visit sample item', () => {
     cy.visit(`${URL_ROOT + URL_PRODUCTS}/${mockedItemDetail.id}`);
   });
+
+  it('check breadcrumbs links function', () => {
+    cy.get('nav')
+      .contains(/products/i)
+      .click();
+    cy.location('pathname').should('equal', `${URL_ROOT + URL_PRODUCTS}`);
+  });
 });
