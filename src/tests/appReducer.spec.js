@@ -17,7 +17,7 @@ describe('app reducer test', () => {
   it('after receive the error...', () => {
     expect(
       appReducer(initialState, {
-        type: appActions.SAVE_ERROR_MESSAGE,
+        type: appActions.SAVE__ERROR_MESSAGE,
         payload: {
           error: {
             ...sampleAppState.error,
@@ -28,7 +28,7 @@ describe('app reducer test', () => {
   });
 
   it('reset the error after the error component is unmounted', () => {
-    expect(appReducer(sampleAppState, { type: appActions.RESET_ERROR_MESSAGE })).toEqual({
+    expect(appReducer(sampleAppState, { type: appActions.RESET__ERROR_MESSAGE })).toEqual({
       ...sampleAppState,
       error: null,
     });

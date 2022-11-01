@@ -1,13 +1,13 @@
 import { all, fork, take } from 'redux-saga/effects';
 
-import { SAVE_ERROR_MESSAGE, RESET_ERROR_MESSAGE } from 'src/actions/appActions';
+import { SAVE__ERROR_MESSAGE, RESET__ERROR_MESSAGE } from 'src/actions/appActions';
 
 export function* saveErrorMessage() {
-  yield take(SAVE_ERROR_MESSAGE);
+  yield take(SAVE__ERROR_MESSAGE);
 }
 
 export function* resetErrorMessage() {
-  yield take(RESET_ERROR_MESSAGE);
+  yield take(RESET__ERROR_MESSAGE);
 }
 
 export default function* rootAppSaga() {

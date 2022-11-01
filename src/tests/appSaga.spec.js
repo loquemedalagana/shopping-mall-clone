@@ -11,11 +11,11 @@ describe('to test app saga', () => {
 
   it('to test save error saga', () => {
     const saveErrorGen = saveErrorMessage();
-    expect(saveErrorGen.next().value).toEqual(take(appActions.SAVE_ERROR_MESSAGE));
+    expect(saveErrorGen.next().value).toEqual(take(appActions.SAVE__ERROR_MESSAGE));
   });
 
   it('to test reset error saga', () => {
     const resetErrorGen = resetErrorMessage();
-    expect(resetErrorGen.next().value).toEqual(take(appActions.RESET_ERROR_MESSAGE));
+    expect(resetErrorGen.next().value).toEqual(take(appActions.RESET__ERROR_MESSAGE));
   });
 });
