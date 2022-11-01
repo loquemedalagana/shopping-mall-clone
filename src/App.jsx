@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material';
 import routes from 'src/routes/routes';
 import MuiTheme from 'src/styles/theme';
 
-const router = createBrowserRouter(routes);
+export const router = createBrowserRouter(routes);
 
 function App() {
   return (
