@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# An shopping mall clone without Typescript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Basic Commands
 
-## Available Scripts
+### to start the app
 
-In the project directory, you can run:
+```bash
+yarn start
+```
 
-### `npm start`
+### to run e2e test based on UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- before the app should be started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+yarn start
+yarn cypress
+```
 
-### `npm test`
+### to run functional test
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+yarn test
+```
 
-### `npm run build`
+# to build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+yarn build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### # git flow
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git flow init
+```
 
-### `npm run eject`
+- release: `master`
+- develop: `develop`
+- features: `feature/*`
+- All the `feature branches` should be merged into `develop` before release.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<hr />
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Routes
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`/products`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- to show product list
 
-## Learn More
+`/:productId`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- to show product detail page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<hr/>
 
-### Code Splitting
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- This app is deployed automatically in `netlify` when `master` branch is updated.
+- [current version is here](https://frolicking-moonbeam-50949b.netlify.app/products)
 
-### Analyzing the Bundle Size
+### release history
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [set routes and wrote breadcrumbs](https://github.com/loquemedalagana/shopping-mall-spa/pull/3)
 
-### Making a Progressive Web App
+<hr/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Project Structure
 
-### Advanced Configuration
+- This will be available after the release of 1.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### UI
 
-### Deployment
+- All UI components are in `src/components` directory.
+- For responsive UI, the devices' sizes are defined in `src/device/devices.js`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Atomic Components
 
-### `npm run build` fails to minify
+- `Image` component shows `error message` when the image cannot be loaded.
+- `Table` component is easier to use, only receiving necessary props: `row, col, data to be shown`.
+- `Loading`to show changeable loading spinner depending on its parent element's size.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Molecule Components
+
+#### Organism Components
+
+- `Header` marked up with `<header/>` tag.
+- `Footer` marked up with `<footer/>` tag.
+- `Error` to show error.
+
+#### Template Component
+
+- `RootLayout` in the `src/routes` directory.
+
+#### Page Components
+
+- All components in the `src/components/**Page.jsx` format
+
+#### Container Components
+
+- The container components connect business logic to UI components.
+
+<hr />
+
+### Business logics
+
+- All component files in `src/containers` directory are for connecting business logics to UI components.
