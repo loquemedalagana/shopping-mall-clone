@@ -9,7 +9,7 @@ export function* fetchProductList() {
     // save to session storage
   } catch (e) {
     yield put({
-      type: actions.PRODUCT_LIST__FAIL,
+      type: actions.FETCH_PRODUCT_LIST__FAIL,
     });
   }
 }

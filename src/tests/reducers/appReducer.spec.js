@@ -5,7 +5,7 @@ describe('app reducer test', () => {
   const sampleAppState = {
     error: {
       status: 404,
-      type: 'character-detail',
+      type: 'product-detail',
       statusText: 'Not found error.',
     },
   };
