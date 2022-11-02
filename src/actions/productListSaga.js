@@ -1,4 +1,4 @@
-import { all, fork, take, call, put, select, takeEvery } from 'redux-saga/effects';
+import { all, fork, call, put, select, throttle } from 'redux-saga/effects';
 
 import * as actions from 'src/actions/productListActions';
 import { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
@@ -8,6 +8,16 @@ import { PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/pro
 export function* loadProductList() {
   let productListDataFromStore = getProductListDataFromStorage();
   const productListState = yield select(selectProductListState);
+
+  if (
+    productListState.data &&
+    productListDataFromStore?.data &&
+    productListState.data.length === productListDataFromStore.data.length
+  ) {
+    put({
+      type: actions.GET__REACHED_END,
+    });
+  }
 
   try {
     if (!productListDataFromStore || productListDataFromStore.isExpired()) {
@@ -38,7 +48,7 @@ export function* loadProductList() {
 }
 
 export function* watchLoadProductList() {
-  yield takeEvery(actions.LOAD__PRODUCT_LIST, loadProductList);
+  yield throttle(3000, actions.LOAD__PRODUCT_LIST, loadProductList);
 }
 
 export default function* rootProductListSaga() {

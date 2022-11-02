@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 class ProductCore {
   constructor(args) {
     this.id = args.id;
@@ -9,3 +11,11 @@ class ProductCore {
 }
 
 export default ProductCore;
+
+export const ProductCoreType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  brand: PropTypes.string,
+  model: PropTypes.string,
+  price: PropTypes.string,
+  imgUrl: PropTypes.string,
+});
