@@ -1,7 +1,7 @@
 export const itemNamesMapForList = {
   brand: 'Marca',
   model: 'Modelo',
-  price: 'Precio',
+  price: 'Precio(€)',
 };
 
 export const itemNamesMapForDetail = {
