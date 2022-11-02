@@ -6,8 +6,9 @@ export const PRODUCTS_COUNT__PER_PAGE = 4;
 
 export const initialState = {
   data: [],
-  currentData: [],
   page: 0,
+  searchKeyword: undefined,
+  fetchedTime: undefined,
   error: null,
   loading: false,
   isReachedEnd: false,
@@ -18,59 +19,25 @@ const productListSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(actions.fetchProductList, state => {
+      .addCase(actions.loadProductList, state => {
         return {
           ...state,
           loading: true,
-          error: null,
-          currentData: [],
-          page: 0,
-          isReachedEnd: false,
         };
       })
-      .addCase(actions.getProductList, state => {
+      .addCase(actions.loadProductListSuccess, (state, action) => {
         return {
           ...state,
-          loading: true,
-          error: null,
-          isReachedEnd: false,
-        };
-      })
-      .addCase(actions.productListLoading, state => {
-        return {
-          ...state,
-          loading: true,
-          error: null,
-        };
-      })
-      .addCase(actions.fetchProductListSuccess, (state, action) => {
-        return {
-          ...state,
-          data: action.payload.data,
+          page: state.page + 1,
           loading: false,
-          error: null,
+          data: [...state.data, ...action.payload.data],
         };
       })
-      .addCase(actions.fetchProductListFail, (state, action) => {
+      .addCase(actions.loadProductListFail, (state, action) => {
         return {
           ...state,
           loading: false,
           error: action.payload.error,
-        };
-      })
-      .addCase(actions.getProductListPerPage, state => {
-        const currentPage = state.page;
-        return {
-          ...state,
-          loading: false,
-          currentData: [
-            ...state.currentData,
-            ...state.data.slice(
-              currentPage * PRODUCTS_COUNT__PER_PAGE,
-              currentPage * PRODUCTS_COUNT__PER_PAGE + PRODUCTS_COUNT__PER_PAGE,
-            ),
-          ],
-          page: currentPage + 1,
         };
       })
       .addCase(actions.getReachedEnd, state => {
