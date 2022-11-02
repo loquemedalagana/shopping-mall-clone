@@ -63,6 +63,14 @@ git flow init
 
 - [set routes and wrote breadcrumbs](https://github.com/loquemedalagana/shopping-mall-spa/pull/3)
 
+### Test
+
+- All the tests will be conducted automatically through `github-action`.
+- `saga`, `reducers` are tested via `Jest`.
+- `Unit tests` are conducted by `Jest`.
+- `UI` and `e2e` tests are conducted by `cypress`.
+- [All the automated test logs are available in this link](https://github.com/loquemedalagana/shopping-mall-spa/actions).
+
 <hr/>
 
 ## Project Structure
