@@ -5,7 +5,7 @@ import ProductDetailData from 'src/models/ProductDetailData';
 
 import mockedItemList from 'src/tests/__mocks__/mockedItemList';
 import mockedItemDetail from 'src/tests/__mocks__/mockedItemDetail';
-import { ONE_HOUR } from "../models/constants";
+import { ONE_HOUR } from 'src/models/constants';
 
 describe('model constructor test', () => {
   it('product list class test', () => {
