@@ -3,20 +3,20 @@ import ProductDetail from 'src/models/ProductDetail';
 import { ONE_HOUR } from 'src/models/constants';
 
 class ProductDetailData {
-  constructor(args, savedTime) {
+  constructor(args, fetchedTime) {
     this.data = new ProductDetail(args);
-    this.savedTime = savedTime;
+    this.fetchedTime = fetchedTime;
   }
 
   isExpired() {
-    return new Date().getTime() - this.savedTime.getTime() >= ONE_HOUR;
+    return new Date().getTime() - this.fetchedTime.getTime() >= ONE_HOUR;
   }
 
   changeTimeForTest() {
     if (!isTest()) {
       throw new Error('This method should only be used in the test env.');
     }
-    this.savedTime = new Date(new Date().getTime() - (ONE_HOUR + 10));
+    this.fetchedTime = new Date(new Date().getTime() - (ONE_HOUR + 10));
   }
 }
 
@@ -38,6 +38,11 @@ export const saveFetchedProductDetailData = data => {
 };
 
 export const getFetchedProductDetailDataFromStorage = itemId => {
-  const storageItems = JSON.parse(sessionStorage.getItem(APP_KEY));
+  const stringifyData = sessionStorage.getItem(APP_KEY);
+  if (!stringifyData) return undefined;
+  const storageItems = JSON.parse(stringifyData);
+
+  if (!storageItems[itemId]) return undefined;
+
   return new ProductDetailData(storageItems[itemId].data, new Date(storageItems[itemId].savedTime));
 };

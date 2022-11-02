@@ -14,8 +14,8 @@ describe('session storage test', () => {
     saveFetchedProductListData(mockedItemList);
     const productListDataFromStorage = getProductListDataFromStorage();
     expect(productListDataFromStorage.data).toEqual(sampleProductListData.data);
-    expect(sampleProductListData.savedTime.getTime()).toBeLessThanOrEqual(
-      productListDataFromStorage.savedTime.getTime(),
+    expect(sampleProductListData.fetchedTime.getTime()).toBeLessThanOrEqual(
+      productListDataFromStorage.fetchedTime.getTime(),
     );
 
     productListDataFromStorage.changeTimeForTest();
@@ -29,8 +29,8 @@ describe('session storage test', () => {
     saveFetchedProductDetailData(mockedItemDetail);
     const productDetailDataFromStorage = getFetchedProductDetailDataFromStorage(mockedItemDetail.id);
     expect(productDetailDataFromStorage.data).toEqual(sampleProductDetailData.data);
-    expect(sampleProductDetailData.savedTime.getTime()).toBeLessThanOrEqual(
-      productDetailDataFromStorage.savedTime.getTime(),
+    expect(sampleProductDetailData.fetchedTime.getTime()).toBeLessThanOrEqual(
+      productDetailDataFromStorage.fetchedTime.getTime(),
     );
 
     productDetailDataFromStorage.changeTimeForTest();

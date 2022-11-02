@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import ProductCore from 'src/models/ProductCore';
 
 const mockedItemList = [
@@ -706,3 +707,4 @@ const mockedItemList = [
 export default mockedItemList;
 
 export const definedMockedItemList = mockedItemList.map(data => new ProductCore(data));
+export const fakeFetchProductList = debounce(() => mockedItemList, 3000);
