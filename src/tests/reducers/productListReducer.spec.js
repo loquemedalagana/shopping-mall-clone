@@ -1,11 +1,9 @@
 import * as actions from 'src/actions/productListActions';
 import { productListReducer, initialState, PRODUCTS_COUNT__PER_PAGE } from 'src/stores/productListStore';
-import mockedItemList from 'src/tests/__mocks__/mockedItemList';
-import ProductCoreData from 'src/models/ProductCoreData';
+import { definedMockedItemList as sampleProductList } from 'src/tests/__mocks__/mockedItemList';
 
 describe('product reducer test', () => {
   const sampleError = new Error('some error occurred');
-  const sampleProductList = mockedItemList.map(data => new ProductCoreData(data));
 
   it('should return initial state', () => {
     expect(productListReducer(undefined, { type: undefined })).toEqual(initialState);

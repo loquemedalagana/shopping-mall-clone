@@ -1,9 +1,10 @@
 import { ONE_HOUR } from 'src/models/constants';
-import ProductCoreData from 'src/models/ProductCoreData';
+import ProductCore from 'src/models/ProductCore';
+import { APP__PRODUCT_LIST_KEY, APP_KEY } from 'src/env';
 
 class ProductListData {
   constructor(args, savedTime) {
-    this.productListData = args.map(data => new ProductCoreData(data));
+    this.data = args.map(data => new ProductCore(data));
     this.savedTime = savedTime;
   }
 
@@ -13,3 +14,26 @@ class ProductListData {
 }
 
 export default ProductListData;
+
+export const saveFetchedProductListData = data => {
+  const storageItems = JSON.parse(sessionStorage.getItem(APP_KEY));
+  const currentTime = new Date();
+  sessionStorage.setItem(
+    APP_KEY,
+    JSON.stringify({
+      ...storageItems,
+      [APP__PRODUCT_LIST_KEY]: {
+        data,
+        savedTime: currentTime,
+      },
+    }),
+  );
+};
+
+export const getProductListDataFromStorage = () => {
+  const storageItems = JSON.parse(sessionStorage.getItem(APP_KEY));
+  return new ProductListData(
+    storageItems[APP__PRODUCT_LIST_KEY].data,
+    new Date(storageItems[APP__PRODUCT_LIST_KEY].savedTime),
+  );
+};

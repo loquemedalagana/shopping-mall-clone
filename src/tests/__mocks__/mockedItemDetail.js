@@ -1,4 +1,6 @@
-module.exports = {
+import ProductDetail from 'src/models/ProductDetail';
+
+const mockedItemDetail = {
   id: 'qu-cIoRt8Y4ZeQdCuOr4l',
   brand: 'Acer',
   model: 'Liquid E3',
@@ -51,3 +53,7 @@ module.exports = {
     ],
   },
 };
+
+export default mockedItemDetail;
+
+export const definedMockedItemDetail = new ProductDetail(mockedItemDetail);

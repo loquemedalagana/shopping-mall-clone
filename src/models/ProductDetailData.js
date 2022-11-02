@@ -1,31 +1,36 @@
-import ProductCoreData from 'src/models/ProductCoreData';
+import { APP_KEY } from 'src/env';
+import ProductDetail from 'src/models/ProductDetail';
+import { ONE_HOUR } from 'src/models/constants';
 
-class ProductDetailData extends ProductCoreData {
-  constructor(args) {
-    super(args);
-    this.networkTechnology = args.networkTechnology;
-    this.networkSpeed = args.networkSpeed;
-    this.announced = args.announced;
-    this.cpu = args.cpu;
-    this.ram = args.ram;
-    this.os = args.os;
-    this.displayResolution = args.displayResolution;
-    this.battery = args.battery;
-    this.cameras = this._getCameraData(args);
-    this.dimentions = args.dimentions;
-    this.weight = args.weight;
-    this.colors = args.colors;
-    this.options = args.options;
+class ProductDetailData {
+  constructor(args, savedTime) {
+    this.data = new ProductDetail(args);
+    this.savedTime = savedTime;
   }
 
-  _getStringToArray(args) {
-    if (typeof args === 'string') return [args];
-    return [...args];
-  }
-
-  _getCameraData(args) {
-    return [...this._getStringToArray(args.primaryCamera), ...this._getStringToArray(args.secondaryCmera)];
+  isExpired() {
+    return this.savedTime - new Date() > ONE_HOUR;
   }
 }
 
 export default ProductDetailData;
+
+export const saveFetchedProductDetailData = data => {
+  const storageItems = JSON.parse(sessionStorage.getItem(APP_KEY));
+  const currentTime = new Date();
+  sessionStorage.setItem(
+    APP_KEY,
+    JSON.stringify({
+      ...storageItems,
+      [data.id]: {
+        data,
+        savedTime: currentTime,
+      },
+    }),
+  );
+};
+
+export const getFetchedProductDetailDataFromStorage = itemId => {
+  const storageItems = JSON.parse(sessionStorage.getItem(APP_KEY));
+  return new ProductDetailData(storageItems[itemId].data, new Date(storageItems[itemId].savedTime));
+};

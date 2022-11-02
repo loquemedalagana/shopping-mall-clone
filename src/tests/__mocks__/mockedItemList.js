@@ -1,4 +1,6 @@
-module.exports = [
+import ProductCore from 'src/models/ProductCore';
+
+const mockedItemList = [
   {
     id: 'ZmGrkLRPXOTpxsU4jjAcv',
     brand: 'Acer',
@@ -700,3 +702,7 @@ module.exports = [
     imgUrl: 'https://front-test-api.herokuapp.com/images/AasKFs5EGbyAEIKkcHQcF.jpg',
   },
 ];
+
+export default mockedItemList;
+
+export const definedMockedItemList = mockedItemList.map(data => new ProductCore(data));

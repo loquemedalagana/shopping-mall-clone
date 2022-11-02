@@ -1,4 +1,4 @@
-class ProductCoreData {
+class ProductCore {
   constructor(args) {
     this.id = args.id;
     this.brand = args.brand;
@@ -8,4 +8,4 @@ class ProductCoreData {
   }
 }
 
-export default ProductCoreData;
+export default ProductCore;
