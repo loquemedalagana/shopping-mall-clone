@@ -17,6 +17,9 @@ describe('session storage test', () => {
     expect(sampleProductListData.savedTime.getTime()).toBeLessThanOrEqual(
       productListDataFromStorage.savedTime.getTime(),
     );
+
+    productListDataFromStorage.changeTimeForTest();
+    expect(productListDataFromStorage.isExpired()).toEqual(true);
   });
 
   it('product detail', () => {
@@ -29,6 +32,9 @@ describe('session storage test', () => {
     expect(sampleProductDetailData.savedTime.getTime()).toBeLessThanOrEqual(
       productDetailDataFromStorage.savedTime.getTime(),
     );
+
+    productDetailDataFromStorage.changeTimeForTest();
+    expect(productDetailDataFromStorage.isExpired()).toEqual(true);
   });
 
   afterEach(() => {

@@ -1,6 +1,6 @@
 import { ONE_HOUR } from 'src/models/constants';
 import ProductCore from 'src/models/ProductCore';
-import { APP__PRODUCT_LIST_KEY, APP_KEY } from 'src/env';
+import { APP__PRODUCT_LIST_KEY, APP_KEY, isTest } from 'src/env';
 
 class ProductListData {
   constructor(args, savedTime) {
@@ -9,7 +9,14 @@ class ProductListData {
   }
 
   isExpired() {
-    return this.savedTime - new Date() > ONE_HOUR;
+    return new Date().getTime() - this.savedTime.getTime() >= ONE_HOUR;
+  }
+
+  changeTimeForTest() {
+    if (!isTest()) {
+      throw new Error('This method should only be used in the test env.');
+    }
+    this.savedTime = new Date(new Date().getTime() - (ONE_HOUR + 10));
   }
 }
 
