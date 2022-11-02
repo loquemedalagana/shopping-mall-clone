@@ -1,0 +1,20 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'cypress-if';
+
+import { URL_PRODUCTS, URL_ROOT } from '../../src/routes/routeURL';
+import { APP_KEY } from '../../src/env';
+
+describe('e2e test for product list page', () => {
+  it('visit e2e test page', () => {
+    cy.visit(URL_ROOT);
+    cy.location('pathname').should('equal', `${URL_ROOT + URL_PRODUCTS}`);
+  });
+
+  it('check the loading state', () => {
+    cy.get('#item-loading').else().log('data is already loaded or still in the initial state');
+  });
+
+  it('check local storage', () => {
+    cy.window().its('sessionStorage').invoke('getItem', APP_KEY).should('exist');
+  });
+});
