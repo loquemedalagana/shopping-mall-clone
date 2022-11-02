@@ -26,7 +26,11 @@ const routes = [
         path: routeURL.URL_PRODUCT_DETAIL,
         element: <ProductDetailContainer />,
       },
-      { path: routeURL.URL_NOT_FOUND, element: <ErrorContainer /> },
+      {
+        path: routeURL.URL_ERROR,
+        element: <ErrorContainer />,
+      },
+      { path: routeURL.URL_NOT_FOUND, element: <ErrorContainer is404 /> },
     ],
   },
 ];
