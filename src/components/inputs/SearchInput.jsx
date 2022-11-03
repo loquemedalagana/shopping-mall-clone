@@ -9,7 +9,18 @@ const SearchInputBox = styled.div`
   min-width: 200px;
 `;
 
-const SearchInput = ({ name, label, value, options, onChange, inputValue, onInputChange, isError, ...rest }) => {
+const SearchInput = ({
+  name,
+  label,
+  value,
+  options,
+  onChange,
+  inputValue,
+  onInputChange,
+  isError,
+  isDisabled,
+  ...rest
+}) => {
   return (
     <SearchInputBox>
       <Autocomplete
@@ -24,6 +35,7 @@ const SearchInput = ({ name, label, value, options, onChange, inputValue, onInpu
           return (
             <TextField
               {...params}
+              disabled={isDisabled}
               error={isError}
               label={label}
               InputProps={{
@@ -41,6 +53,7 @@ const SearchInput = ({ name, label, value, options, onChange, inputValue, onInpu
 
 SearchInput.propTypes = {
   isError: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.string),
   value: PropTypes.string,
   inputValue: PropTypes.string,

@@ -63,10 +63,11 @@ export function* updateProductList() {
   const { searchKeyword } = yield select(selectProductListState);
   console.log('action watched');
   console.log(searchKeyword);
+  yield;
 }
 
 export function* watchUpdateProductList() {
-  yield takeLatest(actions.UPDATE__PRODUCT_LIST, updateProductList);
+  yield debounce(2000, actions.UPDATE__PRODUCT_LIST, updateProductList);
 }
 
 export default function* rootProductListSaga() {

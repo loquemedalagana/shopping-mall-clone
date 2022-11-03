@@ -83,6 +83,7 @@ const SearchSection = () => {
             onInputChange={searchController.handleChangeModelInput}
             options={searchController?.searchOptions?.model}
             isError={searchController.isModelError}
+            isDisabled
             freeSolo
           />
           <RangeInput

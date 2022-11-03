@@ -21,11 +21,14 @@ const useSearchController = () => {
   const [isModelError, _setIsModelError] = useState(false);
   const [isPriceInputError, _setIsPriceInputError] = useState(false);
 
+  const [isInputValuesChanged, _setIsInputValuesChanged] = useState(false);
+
   const handleChangeBrand = (e, nextValue) => {
     _setBrand(nextValue);
   };
 
   const handleChangeBrandInput = (e, nextValue) => {
+    _setIsInputValuesChanged(true);
     _setBrandInput(nextValue);
   };
 
@@ -34,16 +37,19 @@ const useSearchController = () => {
   };
 
   const handleChangeModelInput = (e, nextValue) => {
+    _setIsInputValuesChanged(true);
     _setModelInput(nextValue);
   };
 
   const handleChangeMinPrice = e => {
     const newPrice = parseInt(e.target.value, 10);
+    _setIsInputValuesChanged(true);
     _setMinPrice(newPrice);
   };
 
   const handleChangeMaxPrice = e => {
     const newPrice = parseInt(e.target.value, 10);
+    _setIsInputValuesChanged(true);
     _setMaxPrice(newPrice);
   };
 
@@ -52,8 +58,15 @@ const useSearchController = () => {
       return;
     }
 
-    console.log('can be updated', searchKeyword);
-    // dispatch(actions.updateProductList());
+    if (!isInputValuesChanged) {
+      return;
+    }
+
+    console.log('call');
+    console.log(searchKeyword);
+    dispatch({
+      type: actions.UPDATE__PRODUCT_LIST
+    });
   }, [searchKeyword, searchOptions]);
 
   useEffect(() => {

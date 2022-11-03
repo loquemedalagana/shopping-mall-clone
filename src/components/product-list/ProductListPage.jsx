@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import SearchSection from 'src/components/search/SearchSection';
 import ProductListItem from 'src/components/product-list/ProductListItem';
 import { DEVICE_MOBILE_WIDTH, DEVICE_TABLET_WIDTH, DEVICE_DESKTOP_WIDTH } from 'src/device/devices';
-import Loading from 'src/components/loading/Loading';
+import DotSpinner from 'src/components/loading/DotSpinner';
 import { ProductCoreType } from 'src/models/ProductCore';
 
 const ProductListPageWrapper = styled.div`
@@ -59,11 +59,12 @@ const ProductListPage = ({ bottomRef, isLoading, productList }) => {
       <SearchSection />
       <ProductPageBox className="layout-space">
         <ProductListGridBox>
-          {productList.map((productData, index) => (
-            <ProductListItem product={productData} key={`product-list-item-${index}`} />
-          ))}
+          {productList &&
+            productList.map((productData, index) => (
+              <ProductListItem product={productData} key={`product-list-item-${index}`} />
+            ))}
         </ProductListGridBox>
-        {isLoading ? <Loading /> : <BottomSection ref={bottomRef} />}
+        {isLoading ? <DotSpinner /> : <BottomSection ref={bottomRef} />}
       </ProductPageBox>
     </ProductListPageWrapper>
   );
