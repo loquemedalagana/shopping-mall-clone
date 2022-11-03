@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 import Table from 'src/components/table/Table';
-import CardImage from 'src/components/image/CardImage';
+import CardImage from 'src/components/images/CardImage';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 import { itemNamesMapForList } from 'src/models/itemNamesMap';
 import { ProductCoreType } from 'src/models/ProductCore';

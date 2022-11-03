@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { DEVICE_MOBILE_WIDTH, DEVICE_TABLET_WIDTH, DEVICE_DESKTOP_WIDTH } from 'src/device/devices';
 import Table from 'src/components/table/Table';
-import PageImage from 'src/components/image/PageImage';
+import PageImage from 'src/components/images/PageImage';
 import { itemNamesMapForDetail, itemNamesMapForList } from 'src/models/itemNamesMap';
 import { ProductDetailType } from 'src/models/ProductDetail';
 
