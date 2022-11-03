@@ -7,11 +7,17 @@ export const PRODUCTS_COUNT__PER_PAGE = 4;
 export const initialState = {
   data: [],
   page: 0,
-  searchKeyword: undefined,
+  searchOptions: undefined,
+  searchKeyword: {
+    price: undefined,
+    brand: undefined,
+    model: undefined,
+  },
   fetchedTime: undefined,
   error: null,
   loading: false,
   isReachedEnd: false,
+  isUpdating: false,
 };
 
 const productListSlice = createSlice({
@@ -25,11 +31,56 @@ const productListSlice = createSlice({
           loading: true,
         };
       })
+      .addCase(actions.loadSearchOptions, (state, action) => {
+        return {
+          ...state,
+          searchOptions: action.payload.searchOptions,
+        };
+      })
+      .addCase(actions.updateProductList, state => {
+        return {
+          ...state,
+          loading: true,
+          isReachedEnd: false,
+          error: null,
+          data: [],
+          page: 0,
+          isUpdating: true,
+        };
+      })
+      .addCase(actions.searchProductModel, (state, action) => {
+        return {
+          ...state,
+          searchKeyword: {
+            ...state.searchKeyword,
+            model: action.payload.model,
+          },
+        };
+      })
+      .addCase(actions.searchProductBrand, (state, action) => {
+        return {
+          ...state,
+          searchKeyword: {
+            ...state.searchKeyword,
+            brand: action.payload.brand,
+          },
+        };
+      })
+      .addCase(actions.searchPriceRange, (state, action) => {
+        return {
+          ...state,
+          searchKeyword: {
+            ...state.searchKeyword,
+            price: action.payload.price,
+          },
+        };
+      })
       .addCase(actions.loadProductListSuccess, (state, action) => {
         return {
           ...state,
           page: state.page + 1,
           loading: false,
+          isUpdating: false,
           data: [...state.data, ...action.payload.data],
         };
       })
@@ -37,6 +88,7 @@ const productListSlice = createSlice({
         return {
           ...state,
           loading: false,
+          isUpdating: false,
           error: action.payload.error,
         };
       })

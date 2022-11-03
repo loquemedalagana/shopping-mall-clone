@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
 import { LOAD__PRODUCT_LIST } from 'src/actions/productListActions';
 import ProductListPage from 'src/components/product-list/ProductListPage';
+import TextSpinner from 'src/components/loading/TextSpinner';
 import { selectProductListState } from 'src/stores/productListStore';
-
 import { URL_ERROR, URL_ROOT } from 'src/routes/routeURL';
-import { Navigate } from 'react-router-dom';
 
 const ProductListContainer = () => {
   const dispatch = useDispatch();
@@ -24,6 +24,10 @@ const ProductListContainer = () => {
 
   if (productListState.error) {
     return <Navigate to={URL_ROOT + URL_ERROR} />;
+  }
+
+  if (!productListState.data) {
+    return <TextSpinner />;
   }
 
   return (
