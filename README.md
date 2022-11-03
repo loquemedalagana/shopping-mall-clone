@@ -84,7 +84,7 @@ git flow init
 
 #### Atomic Components
 
-- `Image` component shows `error message` when the image cannot be loaded.
+- `CardImage`, `PageImage` component shows `error message` when the image cannot be loaded.
 - `Table` component is easier to use, only receiving necessary props: `row, col, data to be shown`.
 
 #### Molecule Components
