@@ -1,13 +1,17 @@
-import { select } from 'redux-saga/effects';
+import { select, debounce } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { restApiProductList } from 'src/http/api';
 import * as actions from 'src/actions/productListActions';
-import ProductListData, { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
-import mockedItemList, { definedMockedItemList } from 'src/tests/__mocks__/mockedItemList';
-import { loadProductList } from 'src/actions/productListSaga';
+import mockedItemList, { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
+import {
+  loadProductList,
+  searchProductModel,
+  searchProductPrice,
+  searchProductBrand,
+} from 'src/actions/productListSaga';
 import { initialState, PRODUCTS_COUNT__PER_PAGE, selectProductListState } from '../../stores/productListStore';
 
 describe('product list saga test', () => {
@@ -29,16 +33,11 @@ describe('product list saga test', () => {
         ],
         [matchers.call.fn(restApiProductList), throwError(sampleError)],
       ])
-      .put({
-        type: actions.LOAD__PRODUCT_LIST__FAIL,
-        payload: {
-          error: sampleError,
-        },
-      })
+      .put(actions.loadProductListFail(sampleError))
       .run();
   });
 
-  it('fetching character list saga is successed', async () => {
+  it('fetching character list saga is success before loding search options', async () => {
     const res = await expectSaga(loadProductList)
       .withState({
         ...initialState,
@@ -54,12 +53,57 @@ describe('product list saga test', () => {
         ],
         [matchers.call.fn(restApiProductList), mockedItemList],
       ])
-      .put({
-        type: actions.LOAD__PRODUCT_LIST__SUCCESS,
-        payload: {
-          data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
-        },
-      })
+      .put(actions.loadSearchOptions(mockedListOptions))
+      .put(actions.loadProductListSuccess(definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE)))
       .run();
+  });
+
+  it('fetching character list saga is success after loading search options', async () => {
+    const res = await expectSaga(loadProductList)
+      .withState({
+        ...initialState,
+        page: 1,
+        data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
+        loading: true,
+      })
+      .provide([
+        [
+          select(selectProductListState),
+          {
+            ...initialState,
+            page: 1,
+            data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
+            loading: true,
+          },
+        ],
+        [matchers.call.fn(restApiProductList), mockedItemList],
+      ])
+      .put(
+        actions.loadProductListSuccess(
+          definedMockedItemList.slice(PRODUCTS_COUNT__PER_PAGE, PRODUCTS_COUNT__PER_PAGE * 2),
+        ),
+      )
+      .run();
+  });
+
+  it('test get price range input saga', async () => {
+    const searchPriceRangeGen = searchProductPrice();
+    expect(searchPriceRangeGen.next().value).toEqual(
+      debounce(2000, actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange),
+    );
+  });
+
+  it('test get model input saga', async () => {
+    const searchModelGen = searchProductModel();
+    expect(searchModelGen.next().value).toEqual(
+      debounce(2000, actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel),
+    );
+  });
+
+  it('test get brand input saga', async () => {
+    const searchBrandGen = searchProductBrand();
+    expect(searchBrandGen.next().value).toEqual(
+      debounce(2000, actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand),
+    );
   });
 });

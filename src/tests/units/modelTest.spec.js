@@ -1,7 +1,7 @@
 import ProductListData from 'src/models/ProductListData';
 import ProductDetailData from 'src/models/ProductDetailData';
 
-import mockedItemList, { definedMockedItemList } from 'src/tests/__mocks__/mockedItemList';
+import mockedItemList, { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
 import mockedItemDetail, { definedMockedItemDetail } from 'src/tests/__mocks__/mockedItemDetail';
 import { ONE_HOUR } from 'src/models/constants';
 
@@ -30,5 +30,10 @@ describe('model constructor test', () => {
     const productDetailData = new ProductDetailData(mockedItemDetail, mockedPreviousTime);
     expect(productDetailData.data).toEqual(definedMockedItemDetail);
     expect(productDetailData.isExpired()).toEqual(true);
+  });
+
+  it('product model options test', () => {
+    const productListData = new ProductListData(mockedItemList, new Date());
+    expect(productListData.getOptionsList()).toEqual(mockedListOptions);
   });
 });

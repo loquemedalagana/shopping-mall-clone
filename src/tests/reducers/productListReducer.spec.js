@@ -16,12 +16,7 @@ describe('product reducer test', () => {
           ...initialState,
           loading: true,
         },
-        {
-          type: actions.LOAD__PRODUCT_LIST__FAIL,
-          payload: {
-            error: sampleError,
-          },
-        },
+        actions.loadProductListFail(sampleError),
       ),
     ).toEqual({
       ...initialState,
@@ -37,12 +32,7 @@ describe('product reducer test', () => {
           ...initialState,
           loading: true,
         },
-        {
-          type: actions.LOAD__PRODUCT_LIST__SUCCESS,
-          payload: {
-            data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
-          },
-        },
+        actions.loadProductListSuccess(definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE)),
       ),
     ).toEqual({
       ...initialState,
@@ -62,9 +52,7 @@ describe('product reducer test', () => {
           isReachedEnd: false,
           data: definedMockedItemList,
         },
-        {
-          type: actions.GET__REACHED_END,
-        },
+        actions.getReachedEnd(),
       ),
     ).toEqual({
       page: Math.ceil(definedMockedItemList.length / PRODUCTS_COUNT__PER_PAGE),
@@ -72,6 +60,39 @@ describe('product reducer test', () => {
       loading: false,
       isReachedEnd: true,
       data: definedMockedItemList,
+    });
+  });
+
+  it('get search keyword model', () => {
+    expect(productListReducer(initialState, actions.searchProductModel('Liquid Z6 Plus'))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: 'Liquid Z6 Plus',
+      },
+    });
+  });
+
+  it('get search keyword brand', () => {
+    expect(productListReducer(initialState, actions.searchProductBrand('Acer'))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        brand: 'Acer',
+      },
+    });
+  });
+
+  it('get search keyword price', () => {
+    expect(productListReducer(initialState, actions.searchPriceRange({ min: 180, max: 250 }))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        price: {
+          min: 180,
+          max: 250,
+        },
+      },
     });
   });
 });

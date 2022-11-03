@@ -86,7 +86,6 @@ git flow init
 
 - `Image` component shows `error message` when the image cannot be loaded.
 - `Table` component is easier to use, only receiving necessary props: `row, col, data to be shown`.
-- `Loading`to show changeable loading spinner depending on its parent element's size.
 
 #### Molecule Components
 

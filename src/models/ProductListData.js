@@ -18,6 +18,41 @@ class ProductListData {
     }
     this.fetchedTime = new Date(new Date().getTime() - (ONE_HOUR + 10));
   }
+
+  getOptionsList() {
+    if (!this.data) {
+      throw new Error('Data does not exist!');
+    }
+    const brandOptions = [];
+    const modelOptions = [];
+    const priceOptions = {
+      max: -1,
+      min: 1e9,
+    };
+
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < this.data.length; i++) {
+      const { brand, model, price } = this.data[i];
+      if (!brandOptions.includes(brand)) {
+        brandOptions.push(brand);
+      }
+      if (!modelOptions.includes(model)) {
+        modelOptions.push(model);
+      }
+
+      // eslint-disable-next-line no-continue
+      if (!price) continue;
+
+      priceOptions.max = Math.max(priceOptions.max, Number(price));
+      priceOptions.min = Math.min(priceOptions.min, Number(price));
+    }
+
+    return {
+      brand: brandOptions,
+      model: modelOptions,
+      price: priceOptions,
+    };
+  }
 }
 
 export default ProductListData;
