@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { useSelector } from 'react-redux';
+import { selectProductListState } from 'src/stores/productListStore';
 
 const HelperTextBox = styled.div`
   color: inherit;
@@ -60,6 +62,8 @@ const ScaleInput = styled.input`
 `;
 
 const RangeInput = ({ helperText, value, name, onChange, error, ...props }) => {
+  const { searchOptions } = useSelector(selectProductListState);
+
   return (
     <>
       <HelperTextGroupBox className={error ? 'error_text' : ''}>
@@ -69,8 +73,8 @@ const RangeInput = ({ helperText, value, name, onChange, error, ...props }) => {
       <ScaleInput
         className={error ? 'error_background__dark' : ''}
         type="range"
-        min="0"
-        max="1000"
+        min={searchOptions.price.min}
+        max={searchOptions.price.max}
         step="5"
         value={value}
         onChange={onChange}

@@ -3,6 +3,7 @@ import { throttle } from 'lodash';
 import styled from '@emotion/styled';
 
 import * as constants from 'src/components/search/constants';
+import CircleSpinner from 'src/components/loading/CircleSpinner';
 import SearchInput from 'src/components/inputs/SearchInput';
 import RangeInput from 'src/components/inputs/RangeInput';
 import useSearchController from 'src/hooks/useSearchController';
@@ -53,6 +54,10 @@ const SearchSection = () => {
     };
   }, []);
 
+  if (searchController.searchOptions === undefined) {
+    return <CircleSpinner />;
+  }
+
   return (
     <SearchSectionBackground className={searchSectionClassName}>
       <SearchSectionBox className="layout-space">
@@ -62,12 +67,14 @@ const SearchSection = () => {
             name={constants.NAME__SEARCH_INPUT__BRAND}
             value={searchController.brand}
             onChange={searchController.handleChangeBrand}
+            options={searchController?.searchOptions?.brand}
           />
           <SearchInput
             label="Modelo..."
             name={constants.NAME__SEARCH_INPUT__MODEL}
             value={searchController.model}
             onChange={searchController.handleChangeModel}
+            options={searchController?.searchOptions?.model}
           />
           <RangeInput
             name={constants.NAME__SEARCH_INPUT__MIN_PRICE}

@@ -6,12 +6,12 @@ import { selectProductListState } from 'src/stores/productListStore';
 
 const useSearchController = () => {
   const dispatch = useDispatch();
-  const { searchKeyword } = useSelector(selectProductListState);
+  const { searchKeyword, searchOptions } = useSelector(selectProductListState);
 
   const [brand, _setBrand] = useState(searchKeyword?.brand || '');
   const [model, _setModel] = useState(searchKeyword?.model || '');
-  const [maxPrice, _setMaxPrice] = useState(searchKeyword?.price?.max || 1000);
-  const [minPrice, _setMinPrice] = useState(searchKeyword?.price?.min || 0);
+  const [maxPrice, _setMaxPrice] = useState(searchKeyword?.price?.max || searchOptions?.price?.max || 1000);
+  const [minPrice, _setMinPrice] = useState(searchKeyword?.price?.min || searchOptions?.price?.min || 0);
   const [isPriceInputError, _setIsPriceInputError] = useState(false);
 
   const handleChangeBrand = e => {
@@ -58,6 +58,7 @@ const useSearchController = () => {
     model,
     minPrice,
     maxPrice,
+    searchOptions,
     handleChangeBrand,
     handleChangeModel,
     handleChangeMaxPrice,

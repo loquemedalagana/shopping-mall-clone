@@ -9,7 +9,7 @@ const SearchInputBox = styled.div`
   min-width: 200px;
 `;
 
-const SearchInput = ({ name, label, value, onChange }) => {
+const SearchInput = ({ name, label, value, options, onChange }) => {
   const sampleOptions = ['Acer', 'ssss', 'sss'];
 
   return (
@@ -19,7 +19,7 @@ const SearchInput = ({ name, label, value, onChange }) => {
         freeSolo
         id={name}
         disableClearable
-        options={sampleOptions.map(option => option)}
+        options={options}
         renderInput={params => {
           return (
             <TextField
@@ -38,6 +38,7 @@ const SearchInput = ({ name, label, value, onChange }) => {
 };
 
 SearchInput.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string),
   value: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
