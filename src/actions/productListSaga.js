@@ -5,7 +5,7 @@ import { saveFetchedProductListData, getProductListDataFromStorage } from 'src/m
 import { restApiProductList } from 'src/http/api';
 import { PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/productListStore';
 
-export const getFilterData = (productList, { max: maxPrice, min: minPrice }, brand, model) => {
+export const getFilterDataByPrice = (productList, { max: maxPrice, min: minPrice }) => {
   return productList.filter(productData => productData.price >= minPrice && productData.price <= maxPrice);
 };
 
@@ -34,18 +34,26 @@ export function* loadProductList() {
       yield put(actions.loadSearchOptions(productListDataFromStore.getOptionsList()));
     }
 
-    const productListData = productListState.isUpdating
-      ? getFilterData(productListDataFromStore.data, searchKeyword.price, searchKeyword.brand, searchKeyword.model)
-      : productListDataFromStore.data;
+    let productListData = productListDataFromStore.data;
 
-    yield put(
-      actions.loadProductListSuccess(
-        productListData.slice(
-          page * PRODUCTS_COUNT__PER_PAGE,
-          page * PRODUCTS_COUNT__PER_PAGE + PRODUCTS_COUNT__PER_PAGE,
-        ),
-      ),
+    if (searchKeyword.isUpdating) {
+      productListData = getFilterDataByPrice(productListDataFromStore.data, searchKeyword.price);
+    }
+
+    if (searchKeyword.brand) {
+      productListData = productListData.filter(productData => productData.brand === searchKeyword.brand);
+    }
+
+    const currentPageProductList = productListData.slice(
+      page * PRODUCTS_COUNT__PER_PAGE,
+      page * PRODUCTS_COUNT__PER_PAGE + PRODUCTS_COUNT__PER_PAGE,
     );
+
+    if (currentPageProductList.length === productListData.length) {
+      yield put(actions.getReachedEnd());
+    }
+
+    yield put(actions.loadProductListSuccess(currentPageProductList));
   } catch (e) {
     yield put(actions.loadProductListFail(e));
   }
