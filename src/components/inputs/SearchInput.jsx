@@ -9,17 +9,17 @@ const SearchInputBox = styled.div`
   min-width: 200px;
 `;
 
-const SearchInput = ({ name, label, value, options, onChange }) => {
-  const sampleOptions = ['Acer', 'ssss', 'sss'];
-
+const SearchInput = ({ name, label, value, options, onChange, inputValue, onInputChange, ...rest }) => {
   return (
     <SearchInputBox>
       <Autocomplete
         value={value}
-        freeSolo
         id={name}
         disableClearable
-        options={options}
+        onChange={onChange}
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        options={[''].concat(options)}
         renderInput={params => {
           return (
             <TextField
@@ -32,6 +32,7 @@ const SearchInput = ({ name, label, value, options, onChange }) => {
             />
           );
         }}
+        {...rest}
       />
     </SearchInputBox>
   );
@@ -40,9 +41,12 @@ const SearchInput = ({ name, label, value, options, onChange }) => {
 SearchInput.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
   value: PropTypes.string,
+  inputValue: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  onInputChange: PropTypes.func,
   label: PropTypes.string,
+  freeSolo: PropTypes.bool,
 };
 
 export default SearchInput;

@@ -9,17 +9,29 @@ const useSearchController = () => {
   const { searchKeyword, searchOptions } = useSelector(selectProductListState);
 
   const [brand, _setBrand] = useState(searchKeyword?.brand || '');
+  const [brandInput, _setBrandInput] = useState(searchKeyword?.brand || '');
+
   const [model, _setModel] = useState(searchKeyword?.model || '');
+  const [modelInput, _setModelInput] = useState(searchKeyword?.model || '');
+
   const [maxPrice, _setMaxPrice] = useState(searchKeyword?.price?.max || searchOptions?.price?.max || 1000);
   const [minPrice, _setMinPrice] = useState(searchKeyword?.price?.min || searchOptions?.price?.min || 0);
   const [isPriceInputError, _setIsPriceInputError] = useState(false);
 
-  const handleChangeBrand = e => {
-    _setBrand(e.target.value);
+  const handleChangeBrand = (e, nextValue) => {
+    _setBrand(nextValue);
   };
 
-  const handleChangeModel = e => {
-    _setModel(e.target.value);
+  const handleChangeBrandInput = (e, nextValue) => {
+    _setBrandInput(nextValue);
+  };
+
+  const handleChangeModel = (e, nextValue) => {
+    _setModel(nextValue);
+  };
+
+  const handleChangeModelInput = (e, nextValue) => {
+    _setModelInput(nextValue);
   };
 
   const handleChangeMinPrice = e => {
@@ -47,20 +59,24 @@ const useSearchController = () => {
 
   useEffect(() => {
     dispatch(actions.searchProductBrand(brand));
-  }, [brand]);
+  }, [brand, brandInput]);
 
   useEffect(() => {
-    dispatch(actions.searchProductModel(model));
-  }, [model]);
+    dispatch(actions.searchProductModel(modelInput));
+  }, [model, modelInput]);
 
   return {
     brand,
     model,
+    brandInput,
+    modelInput,
     minPrice,
     maxPrice,
     searchOptions,
     handleChangeBrand,
+    handleChangeBrandInput,
     handleChangeModel,
+    handleChangeModelInput,
     handleChangeMaxPrice,
     handleChangeMinPrice,
     isPriceInputError,

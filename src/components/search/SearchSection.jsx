@@ -67,6 +67,8 @@ const SearchSection = () => {
             name={constants.NAME__SEARCH_INPUT__BRAND}
             value={searchController.brand}
             onChange={searchController.handleChangeBrand}
+            inputValue={searchController.brandInput}
+            onInputChange={searchController.handleChangeBrandInput}
             options={searchController?.searchOptions?.brand}
           />
           <SearchInput
@@ -74,7 +76,10 @@ const SearchSection = () => {
             name={constants.NAME__SEARCH_INPUT__MODEL}
             value={searchController.model}
             onChange={searchController.handleChangeModel}
+            inputValue={searchController.modelInput}
+            onInputChange={searchController.handleChangeModelInput}
             options={searchController?.searchOptions?.model}
+            freeSolo
           />
           <RangeInput
             name={constants.NAME__SEARCH_INPUT__MIN_PRICE}
