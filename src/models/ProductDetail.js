@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types';
 import ProductCore from 'src/models/ProductCore';
-import { ONE_HOUR } from 'src/models/constants';
 
 class ProductDetail extends ProductCore {
   constructor(args) {
@@ -30,3 +30,32 @@ class ProductDetail extends ProductCore {
 }
 
 export default ProductDetail;
+
+export const OptionItemType = PropTypes.shape({
+  code: PropTypes.number,
+  name: PropTypes.string,
+});
+
+export const ProductDetailType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  brand: PropTypes.string,
+  model: PropTypes.string,
+  price: PropTypes.string,
+  imgUrl: PropTypes.string,
+  networkTechnology: PropTypes.string,
+  networkSpeed: PropTypes.string,
+  announced: PropTypes.string,
+  cpu: PropTypes.string,
+  ram: PropTypes.string,
+  os: PropTypes.string,
+  displayResolution: PropTypes.string,
+  battery: PropTypes.string,
+  cameras: PropTypes.arrayOf(PropTypes.string),
+  dimentions: PropTypes.string,
+  weight: PropTypes.string,
+  colors: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.shape({
+    color: PropTypes.arrayOf(OptionItemType),
+    storages: PropTypes.arrayOf(OptionItemType),
+  }),
+});

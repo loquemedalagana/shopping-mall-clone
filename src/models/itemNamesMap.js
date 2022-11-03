@@ -13,5 +13,5 @@ export const itemNamesMapForDetail = {
   battery: 'Batería',
   cameras: 'Cámaras',
   dimentions: 'Dimensiones',
-  weight: 'Peso',
+  weight: 'Peso(g)',
 };
