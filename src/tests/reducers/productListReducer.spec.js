@@ -16,12 +16,7 @@ describe('product reducer test', () => {
           ...initialState,
           loading: true,
         },
-        {
-          type: actions.LOAD__PRODUCT_LIST__FAIL,
-          payload: {
-            error: sampleError,
-          },
-        },
+        actions.loadProductListFail(sampleError),
       ),
     ).toEqual({
       ...initialState,
@@ -37,12 +32,7 @@ describe('product reducer test', () => {
           ...initialState,
           loading: true,
         },
-        {
-          type: actions.LOAD__PRODUCT_LIST__SUCCESS,
-          payload: {
-            data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
-          },
-        },
+        actions.loadProductListSuccess(definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE)),
       ),
     ).toEqual({
       ...initialState,
@@ -62,9 +52,7 @@ describe('product reducer test', () => {
           isReachedEnd: false,
           data: definedMockedItemList,
         },
-        {
-          type: actions.GET__REACHED_END,
-        },
+        actions.getReachedEnd(),
       ),
     ).toEqual({
       page: Math.ceil(definedMockedItemList.length / PRODUCTS_COUNT__PER_PAGE),

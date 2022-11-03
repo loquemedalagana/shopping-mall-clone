@@ -33,12 +33,7 @@ describe('product list saga test', () => {
         ],
         [matchers.call.fn(restApiProductList), throwError(sampleError)],
       ])
-      .put({
-        type: actions.LOAD__PRODUCT_LIST__FAIL,
-        payload: {
-          error: sampleError,
-        },
-      })
+      .put(actions.loadProductListFail(sampleError))
       .run();
   });
 
@@ -58,12 +53,7 @@ describe('product list saga test', () => {
         ],
         [matchers.call.fn(restApiProductList), mockedItemList],
       ])
-      .put({
-        type: actions.LOAD__PRODUCT_LIST__SUCCESS,
-        payload: {
-          data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
-        },
-      })
+      .put(actions.loadProductListSuccess(definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE)))
       .run();
   });
 

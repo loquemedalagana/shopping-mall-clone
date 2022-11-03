@@ -14,9 +14,7 @@ export function* loadProductList() {
     productListDataFromStore?.data &&
     productListState.data.length === productListDataFromStore.data.length
   ) {
-    put({
-      type: actions.GET__REACHED_END,
-    });
+    put(actions.getReachedEnd());
   }
 
   try {
@@ -26,24 +24,18 @@ export function* loadProductList() {
       productListDataFromStore = getProductListDataFromStorage();
     }
 
-    const { page } = productListState;
+    const { page, searchKeyword } = productListState;
 
-    yield put({
-      type: actions.LOAD__PRODUCT_LIST__SUCCESS,
-      payload: {
-        data: productListDataFromStore.data.slice(
+    yield put(
+      actions.loadProductListSuccess(
+        productListDataFromStore.data.slice(
           page * PRODUCTS_COUNT__PER_PAGE,
           page * PRODUCTS_COUNT__PER_PAGE + PRODUCTS_COUNT__PER_PAGE,
         ),
-      },
-    });
+      ),
+    );
   } catch (e) {
-    yield put({
-      type: actions.LOAD__PRODUCT_LIST__FAIL,
-      payload: {
-        error: e,
-      },
-    });
+    yield put(actions.loadProductListFail(e));
   }
 }
 
