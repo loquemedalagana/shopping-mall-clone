@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as actions from 'src/actions/productListActions';
@@ -16,6 +16,9 @@ const useSearchController = () => {
 
   const [maxPrice, _setMaxPrice] = useState(searchKeyword?.price?.max || searchOptions?.price?.max || 1000);
   const [minPrice, _setMinPrice] = useState(searchKeyword?.price?.min || searchOptions?.price?.min || 0);
+
+  const [isBrandError, _setIsBrandError] = useState(false);
+  const [isModelError, _setIsModelError] = useState(false);
   const [isPriceInputError, _setIsPriceInputError] = useState(false);
 
   const handleChangeBrand = (e, nextValue) => {
@@ -45,8 +48,13 @@ const useSearchController = () => {
   };
 
   useEffect(() => {
-    // TODO: call update state
-  }, [searchKeyword]);
+    if (!searchOptions || isPriceInputError || isBrandError) {
+      return;
+    }
+
+    console.log('can be updated', searchKeyword);
+    // dispatch(actions.updateProductList());
+  }, [searchKeyword, searchOptions]);
 
   useEffect(() => {
     if (minPrice > maxPrice) {
@@ -58,12 +66,17 @@ const useSearchController = () => {
   }, [minPrice, maxPrice]);
 
   useEffect(() => {
-    dispatch(actions.searchProductBrand(brand));
-  }, [brand, brandInput]);
+    dispatch(actions.searchProductBrand(brandInput));
+    if (brandInput && brand !== brandInput) {
+      _setIsBrandError(true);
+    } else if (brand === brandInput) {
+      _setIsBrandError(false);
+    }
+  }, [brandInput]);
 
   useEffect(() => {
     dispatch(actions.searchProductModel(modelInput));
-  }, [model, modelInput]);
+  }, [modelInput]);
 
   return {
     brand,
@@ -80,6 +93,8 @@ const useSearchController = () => {
     handleChangeMaxPrice,
     handleChangeMinPrice,
     isPriceInputError,
+    isBrandError,
+    isModelError,
   };
 };
 

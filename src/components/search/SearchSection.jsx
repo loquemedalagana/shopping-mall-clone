@@ -70,6 +70,9 @@ const SearchSection = () => {
             inputValue={searchController.brandInput}
             onInputChange={searchController.handleChangeBrandInput}
             options={searchController?.searchOptions?.brand}
+            isError={searchController.isBrandError}
+            autoSelect
+            autoComplete
           />
           <SearchInput
             label="Modelo..."
@@ -79,6 +82,7 @@ const SearchSection = () => {
             inputValue={searchController.modelInput}
             onInputChange={searchController.handleChangeModelInput}
             options={searchController?.searchOptions?.model}
+            isError={searchController.isModelError}
             freeSolo
           />
           <RangeInput

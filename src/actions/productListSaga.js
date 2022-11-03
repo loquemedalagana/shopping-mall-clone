@@ -1,4 +1,4 @@
-import { all, fork, call, put, select, throttle, debounce } from 'redux-saga/effects';
+import { all, fork, call, put, select, throttle, debounce, takeLatest } from 'redux-saga/effects';
 
 import * as actions from 'src/actions/productListActions';
 import { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
@@ -59,6 +59,22 @@ export function* searchProductPrice() {
   yield debounce(2000, actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
 }
 
+export function* updateProductList() {
+  const { searchKeyword } = yield select(selectProductListState);
+  console.log('action watched');
+  console.log(searchKeyword);
+}
+
+export function* watchUpdateProductList() {
+  yield takeLatest(actions.UPDATE__PRODUCT_LIST, updateProductList);
+}
+
 export default function* rootProductListSaga() {
-  yield all([fork(watchLoadProductList), fork(searchProductPrice), fork(searchProductModel), fork(searchProductBrand)]);
+  yield all([
+    fork(watchLoadProductList),
+    fork(searchProductPrice),
+    fork(searchProductModel),
+    fork(searchProductBrand),
+    fork(watchUpdateProductList),
+  ]);
 }
