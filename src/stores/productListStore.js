@@ -17,6 +17,7 @@ export const initialState = {
   error: null,
   loading: false,
   isReachedEnd: false,
+  isUpdating: false,
 };
 
 const productListSlice = createSlice({
@@ -44,6 +45,7 @@ const productListSlice = createSlice({
           error: null,
           data: [],
           page: 0,
+          isUpdating: true,
         };
       })
       .addCase(actions.searchProductModel, (state, action) => {
@@ -78,14 +80,7 @@ const productListSlice = createSlice({
           ...state,
           page: state.page + 1,
           loading: false,
-          data: [...state.data, ...action.payload.data],
-        };
-      })
-      .addCase(actions.updateProductListSuccess, (state, action) => {
-        return {
-          ...state,
-          page: state.page + 1,
-          loading: false,
+          isUpdating: false,
           data: [...state.data, ...action.payload.data],
         };
       })
@@ -93,13 +88,7 @@ const productListSlice = createSlice({
         return {
           ...state,
           loading: false,
-          error: action.payload.error,
-        };
-      })
-      .addCase(actions.updateProductListFail, (state, action) => {
-        return {
-          ...state,
-          loading: false,
+          isUpdating: false,
           error: action.payload.error,
         };
       })

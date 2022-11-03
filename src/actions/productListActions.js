@@ -13,8 +13,6 @@ export const SEARCH__PRODUCT_BRAND = 'SEARCH__PRODUCT_BRAND';
 export const SEARCH__PRODUCT_PRICE = 'SEARCH__PRODUCT_PRICE';
 
 export const UPDATE__PRODUCT_LIST = 'UPDATE__PRODUCT_LIST';
-export const UPDATE__PRODUCT_LIST__SUCCESS = 'UPDATE__PRODUCT_LIST__SUCCESS';
-export const UPDATE__PRODUCT_LIST__FAIL = 'UPDATE__PRODUCT_LIST__FAIL';
 
 export const loadProductList = createAction(LOAD__PRODUCT_LIST);
 
@@ -71,19 +69,3 @@ export const searchPriceRange = createAction(SEARCH__PRODUCT_PRICE, ({ max, min 
 });
 
 export const updateProductList = createAction(UPDATE__PRODUCT_LIST);
-
-export const updateProductListSuccess = createAction(UPDATE__PRODUCT_LIST__SUCCESS, data => {
-  return {
-    payload: {
-      data,
-    },
-  };
-});
-
-export const updateProductListFail = createAction(UPDATE__PRODUCT_LIST__FAIL, error => {
-  return {
-    payload: {
-      error,
-    },
-  };
-});

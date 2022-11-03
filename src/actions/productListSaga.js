@@ -5,6 +5,10 @@ import { saveFetchedProductListData, getProductListDataFromStorage } from 'src/m
 import { restApiProductList } from 'src/http/api';
 import { PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/productListStore';
 
+export const getFilterData = (productList, { max: maxPrice, min: minPrice }, brand, model) => {
+  return productList.filter(productData => productData.price >= minPrice && productData.price <= maxPrice);
+};
+
 export function* loadProductList() {
   let productListDataFromStore = getProductListDataFromStorage();
   const productListState = yield select(selectProductListState);
@@ -24,15 +28,19 @@ export function* loadProductList() {
       productListDataFromStore = getProductListDataFromStorage();
     }
 
-    const { page, searchOptions } = productListState;
+    const { page, searchOptions, searchKeyword } = productListState;
 
     if (!searchOptions) {
       yield put(actions.loadSearchOptions(productListDataFromStore.getOptionsList()));
     }
 
+    const productListData = productListState.isUpdating
+      ? getFilterData(productListDataFromStore.data, searchKeyword.price, searchKeyword.brand, searchKeyword.model)
+      : productListDataFromStore.data;
+
     yield put(
       actions.loadProductListSuccess(
-        productListDataFromStore.data.slice(
+        productListData.slice(
           page * PRODUCTS_COUNT__PER_PAGE,
           page * PRODUCTS_COUNT__PER_PAGE + PRODUCTS_COUNT__PER_PAGE,
         ),
@@ -59,15 +67,8 @@ export function* searchProductPrice() {
   yield debounce(2000, actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
 }
 
-export function* updateProductList() {
-  const { searchKeyword } = yield select(selectProductListState);
-  console.log('action watched');
-  console.log(searchKeyword);
-  yield;
-}
-
 export function* watchUpdateProductList() {
-  yield debounce(2000, actions.UPDATE__PRODUCT_LIST, updateProductList);
+  yield debounce(2000, actions.UPDATE__PRODUCT_LIST, loadProductList);
 }
 
 export default function* rootProductListSaga() {

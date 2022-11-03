@@ -62,10 +62,8 @@ const useSearchController = () => {
       return;
     }
 
-    console.log('call');
-    console.log(searchKeyword);
     dispatch({
-      type: actions.UPDATE__PRODUCT_LIST
+      type: actions.UPDATE__PRODUCT_LIST,
     });
   }, [searchKeyword, searchOptions]);
 
