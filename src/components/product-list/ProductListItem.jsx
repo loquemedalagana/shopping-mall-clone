@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 import Table from 'src/components/table/Table';
-import Image from 'src/components/image/Image';
+import CardImage from 'src/components/image/CardImage';
 import { DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 import { itemNamesMapForList } from 'src/models/itemNamesMap';
 import { ProductCoreType } from 'src/models/ProductCore';
@@ -61,7 +61,7 @@ const ProductListItem = ({ product }) => {
     <ListPageCardBox id={`product-list-item-${product.id}`}>
       <StyledLink to={`${URL_ROOT + URL_PRODUCTS}/${product.id}`}>
         <CardButtonBox id={`goto-product-detail-${product.id}`}>
-          <Image src={product.imgUrl} alt={product.id} />
+          <CardImage src={product.imgUrl} alt={product.id} />
           <ProductInfo>
             <Table col={2} id={product.id} row={1} items={productInfo} />
           </ProductInfo>

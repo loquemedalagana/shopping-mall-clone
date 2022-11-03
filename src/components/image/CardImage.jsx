@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { DEVICE_DESKTOP_WIDTH, DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 
-const CardImage = styled.img`
+const CardImg = styled.img`
   align-self: center;
   max-width: 80%;
   @media screen and (min-width: ${DEVICE_MOBILE_WIDTH + 1}px) {
@@ -41,7 +41,7 @@ const CardImageNotLoaded = styled.div`
   }
 `;
 
-const Image = ({ ...rest }) => {
+const CardImage = ({ ...rest }) => {
   const [hasImageError, setHasImageError] = useState(false);
 
   const replaceImageWithError = e => {
@@ -52,8 +52,8 @@ const Image = ({ ...rest }) => {
   return hasImageError ? (
     <CardImageNotLoaded>No se puede cargar la imagen.</CardImageNotLoaded>
   ) : (
-    <CardImage onError={replaceImageWithError} {...rest} />
+    <CardImg onError={replaceImageWithError} {...rest} />
   );
 };
 
-export default Image;
+export default CardImage;
