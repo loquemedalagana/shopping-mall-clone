@@ -8,7 +8,11 @@ import PageImage from 'src/components/images/PageImage';
 import { itemNamesMapForDetail, itemNamesMapForList } from 'src/models/itemNamesMap';
 import { ProductDetailType } from 'src/models/ProductDetail';
 
-const ProductDetailPageWrapper = styled.div``;
+const ProductDetailPageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ProductDetailPageBox = styled.section`
   padding-top: 4rem;
@@ -16,6 +20,7 @@ const ProductDetailPageBox = styled.section`
   flex-direction: row;
   gap: 2rem;
   width: 100%;
+  justify-content: space-evenly;
 
   // tablet
   @media screen and (max-width: ${DEVICE_DESKTOP_WIDTH}px) {
@@ -33,6 +38,7 @@ const ProductDetailPageBox = styled.section`
   @media screen and (max-width: ${DEVICE_MOBILE_WIDTH}px) {
     flex-direction: column;
     padding-top: 1rem;
+    justify-content: flex-start;
   }
 `;
 
@@ -42,6 +48,7 @@ const ProductDetailRightSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
 `;
 
 const ProductDetailTableSection = styled.div`
