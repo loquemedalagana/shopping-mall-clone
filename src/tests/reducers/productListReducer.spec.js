@@ -74,4 +74,37 @@ describe('product reducer test', () => {
       data: definedMockedItemList,
     });
   });
+
+  it('get search keyword model', () => {
+    expect(productListReducer(initialState, actions.searchProductModel('Liquid Z6 Plus'))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: 'Liquid Z6 Plus',
+      },
+    });
+  });
+
+  it('get search keyword brand', () => {
+    expect(productListReducer(initialState, actions.searchProductBrand('Acer'))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        brand: 'Acer',
+      },
+    });
+  });
+
+  it('get search keyword price', () => {
+    expect(productListReducer(initialState, actions.searchPriceRange({ min: 180, max: 250 }))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        price: {
+          min: 180,
+          max: 250,
+        },
+      },
+    });
+  });
 });

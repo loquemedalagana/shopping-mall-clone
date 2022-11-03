@@ -1,13 +1,17 @@
-import { select } from 'redux-saga/effects';
+import { select, debounce } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { restApiProductList } from 'src/http/api';
 import * as actions from 'src/actions/productListActions';
-import ProductListData, { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
 import mockedItemList, { definedMockedItemList } from 'src/tests/__mocks__/mockedItemList';
-import { loadProductList } from 'src/actions/productListSaga';
+import {
+  loadProductList,
+  searchProductModel,
+  searchProductPrice,
+  searchProductBrand,
+} from 'src/actions/productListSaga';
 import { initialState, PRODUCTS_COUNT__PER_PAGE, selectProductListState } from '../../stores/productListStore';
 
 describe('product list saga test', () => {
@@ -61,5 +65,26 @@ describe('product list saga test', () => {
         },
       })
       .run();
+  });
+
+  it('test get price range input saga', async () => {
+    const searchPriceRangeGen = searchProductPrice();
+    expect(searchPriceRangeGen.next().value).toEqual(
+      debounce(2000, actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange),
+    );
+  });
+
+  it('test get model input saga', async () => {
+    const searchModelGen = searchProductModel();
+    expect(searchModelGen.next().value).toEqual(
+      debounce(2000, actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel),
+    );
+  });
+
+  it('test get brand input saga', async () => {
+    const searchBrandGen = searchProductBrand();
+    expect(searchBrandGen.next().value).toEqual(
+      debounce(2000, actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand),
+    );
   });
 });
