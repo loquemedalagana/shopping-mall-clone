@@ -2,7 +2,7 @@ import * as actions from 'src/actions/productListActions';
 import { productListReducer, initialState, PRODUCTS_COUNT__PER_PAGE } from 'src/stores/productListStore';
 import { definedMockedItemList } from 'src/tests/__mocks__/mockedItemList';
 
-describe('product reducer test', () => {
+describe('product list reducer test', () => {
   const sampleError = new Error('some error occurred');
 
   it('should return initial state', () => {
