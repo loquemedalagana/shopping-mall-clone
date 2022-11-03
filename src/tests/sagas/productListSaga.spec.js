@@ -19,10 +19,6 @@ describe('product list saga test', () => {
 
   it('fetching character list saga is failed', async () => {
     const res = await expectSaga(loadProductList)
-      .withState({
-        ...initialState,
-        loading: true,
-      })
       .provide([
         [
           select(selectProductListState),
@@ -39,10 +35,6 @@ describe('product list saga test', () => {
 
   it('fetching character list saga is success before loding search options', async () => {
     const res = await expectSaga(loadProductList)
-      .withState({
-        ...initialState,
-        loading: true,
-      })
       .provide([
         [
           select(selectProductListState),
@@ -60,12 +52,6 @@ describe('product list saga test', () => {
 
   it('fetching character list saga is success after loading search options', async () => {
     const res = await expectSaga(loadProductList)
-      .withState({
-        ...initialState,
-        page: 1,
-        data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
-        loading: true,
-      })
       .provide([
         [
           select(selectProductListState),
