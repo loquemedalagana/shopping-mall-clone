@@ -24,7 +24,11 @@ export function* loadProductList() {
       productListDataFromStore = getProductListDataFromStorage();
     }
 
-    const { page, searchKeyword } = productListState;
+    const { page, searchOptions } = productListState;
+
+    if (!searchOptions) {
+      yield put(actions.loadSearchOptions(productListDataFromStore.getOptionsList()));
+    }
 
     yield put(
       actions.loadProductListSuccess(

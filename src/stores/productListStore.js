@@ -7,7 +7,7 @@ export const PRODUCTS_COUNT__PER_PAGE = 4;
 export const initialState = {
   data: [],
   page: 0,
-  searchOptions: {},
+  searchOptions: undefined,
   searchKeyword: {
     price: undefined,
     brand: undefined,
@@ -28,6 +28,12 @@ const productListSlice = createSlice({
         return {
           ...state,
           loading: true,
+        };
+      })
+      .addCase(actions.loadSearchOptions, (state, action) => {
+        return {
+          ...state,
+          searchOptions: action.payload.searchOptions,
         };
       })
       .addCase(actions.updateProductList, state => {

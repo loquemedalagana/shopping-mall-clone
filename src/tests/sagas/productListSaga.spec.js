@@ -5,7 +5,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { restApiProductList } from 'src/http/api';
 import * as actions from 'src/actions/productListActions';
-import mockedItemList, { definedMockedItemList } from 'src/tests/__mocks__/mockedItemList';
+import mockedItemList, { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
 import {
   loadProductList,
   searchProductModel,
@@ -37,7 +37,7 @@ describe('product list saga test', () => {
       .run();
   });
 
-  it('fetching character list saga is successed', async () => {
+  it('fetching character list saga is success before loding search options', async () => {
     const res = await expectSaga(loadProductList)
       .withState({
         ...initialState,
@@ -53,7 +53,36 @@ describe('product list saga test', () => {
         ],
         [matchers.call.fn(restApiProductList), mockedItemList],
       ])
+      .put(actions.loadSearchOptions(mockedListOptions))
       .put(actions.loadProductListSuccess(definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE)))
+      .run();
+  });
+
+  it('fetching character list saga is success after loading search options', async () => {
+    const res = await expectSaga(loadProductList)
+      .withState({
+        ...initialState,
+        page: 1,
+        data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
+        loading: true,
+      })
+      .provide([
+        [
+          select(selectProductListState),
+          {
+            ...initialState,
+            page: 1,
+            data: definedMockedItemList.slice(0, PRODUCTS_COUNT__PER_PAGE),
+            loading: true,
+          },
+        ],
+        [matchers.call.fn(restApiProductList), mockedItemList],
+      ])
+      .put(
+        actions.loadProductListSuccess(
+          definedMockedItemList.slice(PRODUCTS_COUNT__PER_PAGE, PRODUCTS_COUNT__PER_PAGE * 2),
+        ),
+      )
       .run();
   });
 
