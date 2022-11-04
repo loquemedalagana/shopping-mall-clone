@@ -1,10 +1,15 @@
 import { all, fork, call, put, select, takeLatest } from 'redux-saga/effects';
 
 import * as actions from 'src/actions/cartActions';
+import { restApiAddToCart } from 'src/http/api';
 
 export function* addProductToCart({ payload }) {
-  console.log(payload);
-  yield;
+  try {
+    const response = yield call(restApiAddToCart, payload);
+    yield put(actions.addCartSuccess(response));
+  } catch (e) {
+    yield put(actions.addCartFail(e));
+  }
 }
 
 export function* watchAddProductList() {
