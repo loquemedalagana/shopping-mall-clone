@@ -62,6 +62,12 @@ git flow init
 ### release history
 
 - [set routes and wrote breadcrumbs](https://github.com/loquemedalagana/shopping-mall-spa/pull/3)
+- [developed product list](https://github.com/loquemedalagana/shopping-mall-spa/commit/bf36082f813b8d3b3997e2888e3862b79c728916)
+- [developed search UI](https://github.com/loquemedalagana/shopping-mall-spa/commit/4463579b454d859ff3428f658905ef510ed22e22)
+- [add function to search input based on brand](https://github.com/loquemedalagana/shopping-mall-spa/commit/b803cb9f4db869ef7fb1fb16d219274085fb249a)
+- [add product detail UI](https://github.com/loquemedalagana/shopping-mall-spa/commit/deb561c6d91354c294097a9165350b40eef529b6)
+- [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-spa/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
+- [show product count]
 
 ### Test
 
@@ -112,3 +118,10 @@ git flow init
 ### Business logics
 
 - All component files in `src/containers` directory are for connecting business logics to UI components.
+- All input control hooks are in `src/hooks`: search and add to cart based on options.
+
+<hr />
+
+### Retrospection
+
+It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
