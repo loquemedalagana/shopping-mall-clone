@@ -11,5 +11,5 @@ export function* resetErrorMessage() {
 }
 
 export default function* rootAppSaga() {
-  yield all([fork(saveErrorMessage), fork(resetErrorMessage)]);
+  yield all([]);
 }

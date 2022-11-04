@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Error from 'src/components/error/Error';
+import ErrorPage from 'src/components/error/ErrorPage';
 
 const ErrorContainer = ({ is404 }) => {
-  return <Error isErrorPage is404={is404} />;
+  return <ErrorPage is404={is404} />;
 };
 
 ErrorContainer.propTypes = {
