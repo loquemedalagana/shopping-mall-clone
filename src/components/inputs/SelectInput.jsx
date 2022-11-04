@@ -20,9 +20,9 @@ const SelectBox = styled.div`
   width: fit-content;
   padding: 0.5rem 0.5rem 0.5rem 0.25rem;
   position: relative;
-  background: #EEF1FF;
+  background: #eef1ff;
   border-radius: 1rem;
-  border: 1px solid #B1B2FF;
+  border: 1px solid #b1b2ff;
 
   & > input {
     display: none;
@@ -57,12 +57,14 @@ const StyledOption = styled.option`
   padding: 0;
 `;
 
-const SelectInput = ({ value, onChange, label, options, ...rest }) => {
+const SelectInput = ({ defaultValue, onChange, label, options, ...rest }) => {
+  console.log(label, defaultValue);
+
   return (
     <SelectWrapper>
       <InputLabel>{label}</InputLabel>
       <SelectBox>
-        <StyledSelectOptions value={value} label={label} onChange={onChange} {...rest}>
+        <StyledSelectOptions defaultValue={defaultValue} label={label} onChange={onChange} {...rest}>
           {options.map(({ code, name }, index) => {
             return (
               <StyledOption key={`${label}-options-${index}`} value={code}>
@@ -77,7 +79,8 @@ const SelectInput = ({ value, onChange, label, options, ...rest }) => {
 };
 
 SelectInput.propTypes = {
-  value: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(OptionItemType).isRequired,

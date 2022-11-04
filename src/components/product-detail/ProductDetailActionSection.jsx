@@ -5,31 +5,46 @@ import styled from '@emotion/styled';
 import SelectInput from 'src/components/inputs/SelectInput';
 import useAddProductController from 'src/hooks/useAddProductController';
 import { OptionItemType } from 'src/models/ProductDetail';
+import Button from '@mui/material/Button';
 
-const ProductDetailOptionsBox = styled.form`
+const ProductDetailOptionFormsBox = styled.form`
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProductDetailOptionsGroup = styled.div`
   width: inherit;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 const ProductDetailActionSection = ({ options }) => {
   const addProductController = useAddProductController();
 
+  console.log(options.storages[0].code);
+
   return (
-    <ProductDetailOptionsBox>
-      <SelectInput
-        onChange={addProductController.handleColorChange}
-        options={options.colors}
-        label="Color"
-        value={addProductController.color}
-      />
-      <SelectInput
-        onChange={addProductController.handleStorageChange}
-        options={options.storages}
-        label="Storage"
-        value={addProductController.storage}
-      />
-    </ProductDetailOptionsBox>
+    <ProductDetailOptionFormsBox onSubmit={addProductController.handleSubmit}>
+      <ProductDetailOptionsGroup>
+        <SelectInput
+          onChange={addProductController.handleColorChange}
+          options={options.colors}
+          defaultValue={options.colors[0].code}
+          label="Color"
+        />
+        <SelectInput
+          defaultValue={options.storages[0].code}
+          onChange={addProductController.handleStorageChange}
+          options={options.storages}
+          label="Storage"
+        />
+      </ProductDetailOptionsGroup>
+      <Button variant="contained" onClick={addProductController.handleSubmit}>
+        Add
+      </Button>
+    </ProductDetailOptionFormsBox>
   );
 };
 

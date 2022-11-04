@@ -42,7 +42,12 @@ const ProductDetailPageBox = styled.section`
   }
 `;
 
-const ProductDetailLeftSection = styled.div``;
+const ProductDetailLeftSection = styled.div`
+  display: flex;
+  @media screen and (max-width: ${DEVICE_MOBILE_WIDTH}px) {
+    align-self: center;
+  }
+`;
 
 const ProductDetailRightSection = styled.div`
   display: flex;
