@@ -5,6 +5,10 @@ import { DEVICE_DESKTOP_WIDTH, DEVICE_MOBILE_WIDTH } from 'src/device/devices';
 
 const CardImg = styled.img`
   align-self: flex-start;
+
+  @media screen and (max-width: ${DEVICE_MOBILE_WIDTH}px) {
+    align-self: center;
+  }
 `;
 
 const CardImageNotLoaded = styled.div`

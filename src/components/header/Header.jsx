@@ -41,7 +41,7 @@ const Header = () => {
     <HeaderBox>
       <HeaderBody className="layout-space">
         <BreadCrumbs />
-        <HeaderRightSection>right section</HeaderRightSection>
+        <HeaderRightSection>el número de productos: </HeaderRightSection>
       </HeaderBody>
     </HeaderBox>
   );
