@@ -38,6 +38,7 @@ git flow init
 - release: `master`
 - develop: `develop`
 - features: `feature/*`
+- hotfix: `hotfix/*`
 - All the `feature branches` should be merged into `develop` before release.
 
 <hr />
@@ -57,25 +58,25 @@ git flow init
 ## Deployment
 
 - This app is deployed automatically in `netlify` when `master` branch is updated.
-- [current version is here](https://frolicking-moonbeam-50949b.netlify.app/products)
+- [current version is here](https://frolicking-moonbeam-50949b.netlify.app)
 
 ### release history
 
-- [set routes and wrote breadcrumbs](https://github.com/loquemedalagana/shopping-mall-spa/pull/3)
-- [developed product list](https://github.com/loquemedalagana/shopping-mall-spa/commit/bf36082f813b8d3b3997e2888e3862b79c728916)
-- [developed search UI](https://github.com/loquemedalagana/shopping-mall-spa/commit/4463579b454d859ff3428f658905ef510ed22e22)
-- [add function to search input based on brand](https://github.com/loquemedalagana/shopping-mall-spa/commit/b803cb9f4db869ef7fb1fb16d219274085fb249a)
-- [add product detail UI](https://github.com/loquemedalagana/shopping-mall-spa/commit/deb561c6d91354c294097a9165350b40eef529b6)
-- [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-spa/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
-- [show product count](https://github.com/loquemedalagana/shopping-mall-spa/commit/5846d0ba78a9d20ac009518b38d00bb3888ea012)
+- [set routes and wrote breadcrumbs](https://github.com/loquemedalagana/shopping-mall-clone/pull/3)
+- [developed product list](https://github.com/loquemedalagana/shopping-mall-clone/commit/bf36082f813b8d3b3997e2888e3862b79c728916)
+- [developed search UI](https://github.com/loquemedalagana/shopping-mall-clone/commit/4463579b454d859ff3428f658905ef510ed22e22)
+- [add function to search input based on brand](https://github.com/loquemedalagana/shopping-mall-clone/commit/b803cb9f4db869ef7fb1fb16d219274085fb249a)
+- [add product detail UI](https://github.com/loquemedalagana/shopping-mall-clone/commit/deb561c6d91354c294097a9165350b40eef529b6)
+- [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-clone/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
+- [show product count](https://github.com/loquemedalagana/shopping-mall-clone/commit/5846d0ba78a9d20ac009518b38d00bb3888ea012)
 
 ### Test
 
+- All features are developed in `TDD`, releasing functional codes and testing codes at the same time.
 - All the tests will be conducted automatically through `github-action`.
-- `saga`, `reducers` are tested via `Jest`.
-- `Unit tests` are conducted by `Jest`.
+- `saga`, `reducers`, `models` are tested via `Jest`.
 - `UI` and `e2e` tests are conducted by `cypress`.
-- [All the automated test logs are available in this link](https://github.com/loquemedalagana/shopping-mall-spa/actions).
+- [All the automated test logs are available in this link](https://github.com/loquemedalagana/shopping-mall-clone/actions).
 
 <hr/>
 
@@ -92,9 +93,9 @@ git flow init
 
 - Components in `src/components/image` show `error message` when the image cannot be loaded.
 - `Table` component is easier to use, only receiving necessary props: `row, col, data to be shown`.
-- Components in `src/components/inputs`
-- Components in `src/components/loading`
-- `src/components/header/LinkRouter`
+- Components in `src/components/inputs` -> Input elements
+- Components in `src/components/loading` -> Loading spinners
+- `src/components/header/LinkRouter` -> Link components for the `Breadcrumbs`.
 
 #### Molecule Components
 
@@ -130,7 +131,25 @@ git flow init
 - All component files in `src/containers` directory are for connecting business logics to UI components.
 - All input control hooks are in `src/hooks`: search and add to cart based on options.
 
+### State Management
+
+#### App
+
+#### ProductList
+
+#### ProductDetail
+
+#### Cart
+
+- 백앤드에서 토큰을 내려 줘야 accumulated된 값을 저장할 수 있는데, 그게 아니라서 어쩔 수 없이... 로컬스토리지를 이용, withcridential true.. cookie value [Link is here](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/src/stores/cartStore.js)
+
 <hr />
+
+### 남은 기능
+
+- app saga에서 만료된 데이터 지우기
+- 모델명으로 검색하는 기능 => 브랜드를 선택하면 거기에 맞는 모델이 목록에 생김
+- 정렬??
 
 ### Retrospection
 
