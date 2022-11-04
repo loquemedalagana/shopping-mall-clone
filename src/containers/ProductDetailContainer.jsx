@@ -6,7 +6,7 @@ import * as actions from 'src/actions/productDetailActions';
 import ProductDetailPage from 'src/components/product-detail/ProductDetailPage';
 import TextSpinner from 'src/components/loading/TextSpinner';
 import { selectProductDetailState } from 'src/stores/productDetailStore';
-import { URL_ERROR, URL_ROOT } from 'src/routes/routeURL';
+import { URL_ROOT, URL_NOT_FOUND } from 'src/routes/routeURL';
 
 const ProductDetailContainer = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const ProductDetailContainer = () => {
   }, []);
 
   if (productDetailState.error) {
-    return <Navigate to={URL_ROOT + URL_ERROR} />;
+    return <Navigate to={URL_ROOT + URL_NOT_FOUND} />;
   }
 
   if (productDetailState.data && !productDetailState.loading) {
