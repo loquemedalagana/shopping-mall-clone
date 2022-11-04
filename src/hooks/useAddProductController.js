@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 

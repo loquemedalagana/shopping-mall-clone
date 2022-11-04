@@ -1,10 +1,11 @@
 import ProductListData, { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
-import ProductDetailData from 'src/models/ProductDetailData';
-
+import ProductDetailData, {
+  getFetchedProductDetailDataFromStorage,
+  saveFetchedProductDetailData,
+} from 'src/models/ProductDetailData';
 import mockedItemList from 'src/tests/__mocks__/mockedItemList';
 import mockedItemDetail from 'src/tests/__mocks__/mockedItemDetail';
 import { createMockSessionStorage } from 'src/tests/__mocks__/mockStorage';
-import { getFetchedProductDetailDataFromStorage, saveFetchedProductDetailData } from 'src/models/ProductDetailData';
 
 describe('session storage test', () => {
   it('product list', () => {
