@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import * as actions from 'src/actions/cartActions';
+import { getTotalCountOfProductsInCartInStorage } from 'src/models/ProductDetailData';
 
 export const initialState = {
-  count: 0,
+  count: getTotalCountOfProductsInCartInStorage(),
   loading: false,
   error: null,
 };
