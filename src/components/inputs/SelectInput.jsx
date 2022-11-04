@@ -58,7 +58,6 @@ const StyledOption = styled.option`
 `;
 
 const SelectInput = ({ defaultValue, onChange, label, options, ...rest }) => {
-  console.log(label, defaultValue);
 
   return (
     <SelectWrapper>
