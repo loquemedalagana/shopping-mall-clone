@@ -23,8 +23,6 @@ const ProductDetailOptionsGroup = styled.div`
 const ProductDetailActionSection = ({ options }) => {
   const addProductController = useAddProductController();
 
-  console.log(options.storages[0].code);
-
   return (
     <ProductDetailOptionFormsBox onSubmit={addProductController.handleSubmit}>
       <ProductDetailOptionsGroup>
