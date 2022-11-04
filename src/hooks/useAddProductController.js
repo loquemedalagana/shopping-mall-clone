@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import * as actions from 'src/actions/cartActions';
 import { selectProductDetailState } from 'src/stores/productDetailStore';
 
 const useAddProductController = () => {
@@ -16,13 +17,12 @@ const useAddProductController = () => {
   };
 
   const handleStorageChange = e => {
-    console.log(e.target.value);
+    _setStorage(e.target.value);
   };
 
-  const handleSubmit = () => {
-    console.log(color, storage);
-    console.log(color, storage, productDetailState.productId);
-  };
+  const handleSubmit = useCallback(() => {
+    dispatch(actions.addCartRequest({ id: productDetailState.productId, colorCode: color, storageCode: storage }));
+  }, [productDetailState.productId]);
 
   return {
     color,

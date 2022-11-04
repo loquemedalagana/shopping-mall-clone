@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import BreadCrumbs from 'src/components/header/BreadCrumbs';
+import CartCount from 'src/components/header/CartCount';
 import { HEADER_HEIGHT } from 'src/components/header/constants';
 
 const HeaderBox = styled.header`
@@ -41,7 +42,9 @@ const Header = () => {
     <HeaderBox>
       <HeaderBody className="layout-space">
         <BreadCrumbs />
-        <HeaderRightSection>el número de productos: </HeaderRightSection>
+        <HeaderRightSection>
+          <CartCount />
+        </HeaderRightSection>
       </HeaderBody>
     </HeaderBox>
   );
