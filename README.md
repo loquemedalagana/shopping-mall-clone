@@ -67,6 +67,7 @@ git flow init
 - [add function to search input based on brand](https://github.com/loquemedalagana/shopping-mall-spa/commit/b803cb9f4db869ef7fb1fb16d219274085fb249a)
 - [add product detail UI](https://github.com/loquemedalagana/shopping-mall-spa/commit/deb561c6d91354c294097a9165350b40eef529b6)
 - [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-spa/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
+- [show product count]
 
 ### Test
 
