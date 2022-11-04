@@ -67,7 +67,7 @@ git flow init
 - [add function to search input based on brand](https://github.com/loquemedalagana/shopping-mall-spa/commit/b803cb9f4db869ef7fb1fb16d219274085fb249a)
 - [add product detail UI](https://github.com/loquemedalagana/shopping-mall-spa/commit/deb561c6d91354c294097a9165350b40eef529b6)
 - [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-spa/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
-- [show product count]
+- [show product count](https://github.com/loquemedalagana/shopping-mall-spa/commit/5846d0ba78a9d20ac009518b38d00bb3888ea012)
 
 ### Test
 
@@ -90,16 +90,26 @@ git flow init
 
 #### Atomic Components
 
-- `CardImage`, `PageImage` component shows `error message` when the image cannot be loaded.
+- Components in `src/components/image` show `error message` when the image cannot be loaded.
 - `Table` component is easier to use, only receiving necessary props: `row, col, data to be shown`.
+- Components in `src/components/inputs`
+- Components in `src/components/loading`
+- `src/components/header/LinkRouter`
 
 #### Molecule Components
+
+- `src/components/header/BreadCrumbs`
+- `src/components/header/CartCount`
+- `src/components/header/ProductDetailActions`
+- `src/components/product-list/ProductListItem`
+- `src/components/search/SearchSection`
+- `src/components/error/ErrorElement`
 
 #### Organism Components
 
 - `Header` marked up with `<header/>` tag.
 - `Footer` marked up with `<footer/>` tag.
-- `Error` to show error.
+- `ErrorPage` to show error.
 
 #### Template Component
 
