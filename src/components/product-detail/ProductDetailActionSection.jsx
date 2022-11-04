@@ -39,8 +39,8 @@ const ProductDetailActionSection = ({ options }) => {
           label="Storage"
         />
       </ProductDetailOptionsGroup>
-      <Button variant="contained" onClick={addProductController.handleSubmit}>
-        Add
+      <Button disabled={addProductController.isLoading} variant="contained" onClick={addProductController.handleSubmit}>
+        {addProductController.isLoading ? 'Loading' : 'Add'}
       </Button>
     </ProductDetailOptionFormsBox>
   );

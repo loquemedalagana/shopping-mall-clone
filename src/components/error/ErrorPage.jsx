@@ -30,23 +30,7 @@ const ErrorContentBox = styled.section`
   }
 `;
 
-const ErrorTextBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: center;
-  gap: 32px;
-
-  h1,
-  h2,
-  h3,
-  h4,
-  p {
-    margin: 0;
-  }
-`;
-
-const Error = ({ isErrorPage, is404 }) => {
+const ErrorPage = ({ is404 }) => {
   const navigate = useNavigate();
   // const appState = useSelector(selectAppState);
 
@@ -70,30 +54,21 @@ const Error = ({ isErrorPage, is404 }) => {
     navigate(-1);
   };
 
-  if (isErrorPage) {
-    return (
-      <ErrorPageBox id="error-page">
-        <ErrorContentBox>
-          <h1>Error..</h1>
-          {errorMessageComponent}
-          <Button id="go-back-button" variant="contained" onClick={handleGoBack}>
-            Regresa
-          </Button>
-        </ErrorContentBox>
-      </ErrorPageBox>
-    );
-  }
-
   return (
-    <ErrorTextBox id="error-message">
-      <p>Algo salió mal..</p>
-    </ErrorTextBox>
+    <ErrorPageBox id="error-page">
+      <ErrorContentBox>
+        <h1>Error..</h1>
+        {errorMessageComponent}
+        <Button id="go-back-button" variant="contained" onClick={handleGoBack}>
+          Regresa
+        </Button>
+      </ErrorContentBox>
+    </ErrorPageBox>
   );
 };
 
-Error.propTypes = {
-  isErrorPage: PropTypes.bool.isRequired,
+ErrorPage.propTypes = {
   is404: PropTypes.bool,
 };
 
-export default Error;
+export default ErrorPage;

@@ -63,5 +63,6 @@
     "prettier": "^2.7.1",
     "redux-saga-test-plan": "^4.0.6",
     "sass": "^1.55.0"
-  }
+  },
+  "proxy": "https://front-test-api.herokuapp.com"
 }

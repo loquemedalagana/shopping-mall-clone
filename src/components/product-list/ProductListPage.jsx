@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import SearchSection from 'src/components/search/SearchSection';
+import ErrorElement from 'src/components/error/ErrorElement';
 import ProductListItem from 'src/components/product-list/ProductListItem';
 import { DEVICE_MOBILE_WIDTH, DEVICE_TABLET_WIDTH, DEVICE_DESKTOP_WIDTH } from 'src/device/devices';
 import DotSpinner from 'src/components/loading/DotSpinner';
@@ -58,12 +59,15 @@ const ProductListPage = ({ bottomRef, isLoading, productList }) => {
     <ProductListPageWrapper>
       <SearchSection />
       <ProductPageBox className="layout-space">
-        <ProductListGridBox>
-          {productList &&
-            productList.map((productData, index) => (
+        {productList.length > 0 ? (
+          <ProductListGridBox>
+            {productList.map((productData, index) => (
               <ProductListItem product={productData} key={`product-list-item-${index}`} />
             ))}
-        </ProductListGridBox>
+          </ProductListGridBox>
+        ) : (
+          !isLoading && <ErrorElement is404 />
+        )}
         {isLoading ? <DotSpinner /> : <BottomSection ref={bottomRef} />}
       </ProductPageBox>
     </ProductListPageWrapper>
