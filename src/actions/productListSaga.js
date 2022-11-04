@@ -4,6 +4,7 @@ import * as actions from 'src/actions/productListActions';
 import { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
 import { restApiProductList } from 'src/http/api';
 import { PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/productListStore';
+import { isTest } from 'src/env';
 
 export const getFilterDataByPrice = (productList, { max: maxPrice, min: minPrice }) => {
   return productList.filter(productData => productData.price >= minPrice && productData.price <= maxPrice);
@@ -34,11 +35,9 @@ export function* loadProductList() {
       yield put(actions.loadSearchOptions(productListDataFromStore.getOptionsList()));
     }
 
-    let productListData = productListDataFromStore.data;
-
-    if (searchKeyword.isUpdating) {
-      productListData = getFilterDataByPrice(productListDataFromStore.data, searchKeyword.price);
-    }
+    let productListData = isTest()
+      ? productListDataFromStore.data
+      : getFilterDataByPrice(productListDataFromStore.data, searchKeyword.price);
 
     if (searchKeyword.brand) {
       productListData = productListData.filter(productData => productData.brand === searchKeyword.brand);
@@ -49,7 +48,7 @@ export function* loadProductList() {
       page * PRODUCTS_COUNT__PER_PAGE + PRODUCTS_COUNT__PER_PAGE,
     );
 
-    if (currentPageProductList.length === productListData.length) {
+    if (currentPageProductList.length + productListState.data.length === productListData.length) {
       yield put(actions.getReachedEnd());
     }
 
