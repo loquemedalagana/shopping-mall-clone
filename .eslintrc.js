@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ['react', 'cypress'],
   rules: {
+    'react/self-closing-comp': 'off',
     'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',
     'react/require-default-props': 'off',

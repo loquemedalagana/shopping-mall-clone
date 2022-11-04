@@ -24,7 +24,7 @@ const cartSlice = createSlice({
         return {
           ...state,
           loading: false,
-          count: action.payload.data.count,
+          count: state.count + action.payload.data.count,
         };
       })
       .addCase(actions.addCartFail, (state, action) => {
