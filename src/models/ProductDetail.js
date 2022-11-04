@@ -55,7 +55,7 @@ export const ProductDetailType = PropTypes.shape({
   weight: PropTypes.string,
   colors: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.shape({
-    color: PropTypes.arrayOf(OptionItemType),
+    colors: PropTypes.arrayOf(OptionItemType),
     storages: PropTypes.arrayOf(OptionItemType),
   }),
 });

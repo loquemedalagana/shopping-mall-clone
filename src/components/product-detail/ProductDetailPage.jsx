@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 import { DEVICE_MOBILE_WIDTH, DEVICE_TABLET_WIDTH, DEVICE_DESKTOP_WIDTH } from 'src/device/devices';
 import Table from 'src/components/table/Table';
 import PageImage from 'src/components/images/PageImage';
-import { itemNamesMapForDetail, itemNamesMapForList } from 'src/models/itemNamesMap';
+import ProductDetailActionSection from 'src/components/product-detail/ProductDetailActionSection';
+import { itemNamesMapForDetail } from 'src/models/itemNamesMap';
 import { ProductDetailType } from 'src/models/ProductDetail';
 
 const ProductDetailPageWrapper = styled.div`
@@ -51,12 +51,13 @@ const ProductDetailRightSection = styled.div`
   align-items: center;
 `;
 
-const ProductDetailTableSection = styled.div`
+const ProductDetailTableBox = styled.div`
   background: #faf7f0;
 `;
 
-const ProductDetailActionSection = styled.div`
+const ProductDetailActionBox = styled.div`
   background: #eef1ff;
+  width: 100%;
 `;
 
 const ProductDetailPage = ({ product }) => {
@@ -76,10 +77,12 @@ const ProductDetailPage = ({ product }) => {
           <PageImage src={product.imgUrl} alt={product.id} />
         </ProductDetailLeftSection>
         <ProductDetailRightSection>
-          <ProductDetailTableSection>
+          <ProductDetailTableBox>
             <Table col={2} id={product.id} row={1} items={productInfo} />
-          </ProductDetailTableSection>
-          <ProductDetailActionSection>actions</ProductDetailActionSection>
+          </ProductDetailTableBox>
+          <ProductDetailActionBox>
+            <ProductDetailActionSection options={product.options} />
+          </ProductDetailActionBox>
         </ProductDetailRightSection>
       </ProductDetailPageBox>
     </ProductDetailPageWrapper>
