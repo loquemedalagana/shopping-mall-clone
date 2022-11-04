@@ -1,4 +1,4 @@
-import { APP_KEY, isTest } from 'src/env';
+import { APP_KEY, isTest, APP__CART_COUNT_KEY } from 'src/env';
 import ProductDetail from 'src/models/ProductDetail';
 import { ONE_HOUR } from 'src/models/constants';
 
@@ -45,4 +45,24 @@ export const getFetchedProductDetailDataFromStorage = itemId => {
   if (!storageItems[itemId]) return undefined;
 
   return new ProductDetailData(storageItems[itemId].data, new Date(storageItems[itemId].savedTime));
+};
+
+export const saveTotalCountOfProductsInCartInStorage = ({ count }) => {
+  localStorage.setItem(
+    APP_KEY,
+    JSON.stringify({
+      [APP__CART_COUNT_KEY]: {
+        count,
+      },
+    }),
+  );
+};
+
+export const getTotalCountOfProductsInCartInStorage = () => {
+  const stringifyData = localStorage.getItem(APP_KEY);
+  if (!stringifyData) return 0;
+  const storageItems = JSON.parse(stringifyData);
+  if (!storageItems[APP__CART_COUNT_KEY]) return 0;
+
+  return parseInt(storageItems[APP__CART_COUNT_KEY].count, 10) || 0;
 };

@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as actions from 'src/actions/cartActions';
 import { selectProductDetailState } from 'src/stores/productDetailStore';
+import { selectCartState } from 'src/stores/cartStore';
 
 const useAddProductController = () => {
   const dispatch = useDispatch();
   const productDetailState = useSelector(selectProductDetailState);
+  const cartState = useSelector(selectCartState);
 
   const [color, _setColor] = useState(productDetailState?.data?.options?.colors[0].code);
   const [storage, _setStorage] = useState(productDetailState?.data?.options?.storages[0].code);
@@ -27,6 +29,7 @@ const useAddProductController = () => {
   return {
     color,
     storage,
+    isLoading: cartState.isLoading,
     handleStorageChange,
     handleColorChange,
     handleSubmit,
