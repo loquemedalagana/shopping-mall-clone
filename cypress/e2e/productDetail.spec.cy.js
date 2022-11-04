@@ -11,6 +11,13 @@ describe('e2e test for product detail page', () => {
     cy.visit(`${URL_ROOT + URL_PRODUCTS}/${sampleId}`);
   });
 
+  it('check breadcrumbs links function', () => {
+    cy.get('nav')
+      .contains(/products/i)
+      .click();
+    cy.location('pathname').should('equal', `${URL_ROOT + URL_PRODUCTS}`);
+  });
+
   it('check session storage', () => {
     cy.window().its('sessionStorage').invoke('getItem', APP_KEY).should('include', sampleId);
   });

@@ -1,11 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'cypress-if';
 import { URL_PRODUCTS, URL_ROOT } from '../../src/routes/routeURL';
-import { APP__CART_COUNT_KEY, APP__PRODUCT_LIST_KEY, APP_KEY } from '../../src/env';
+import { APP__CART_COUNT_KEY, APP_KEY } from '../../src/env';
 
 describe('visit routes', () => {
-  const sampleId = 'qu-cIoRt8Y4ZeQdCuOr4l';
-
   it('visit home and redirect to /products link', () => {
     cy.visit(URL_ROOT);
     cy.location('pathname')
@@ -14,15 +12,8 @@ describe('visit routes', () => {
       .log('the connection is bad...');
   });
 
-  it('visit sample item', () => {
-    cy.visit(`${URL_ROOT + URL_PRODUCTS}/${sampleId}`);
-  });
-
   it('check breadcrumbs links function', () => {
-    cy.get('nav')
-      .contains(/products/i)
-      .click();
-    cy.location('pathname').should('equal', `${URL_ROOT + URL_PRODUCTS}`);
+    cy.get('nav').contains(/home/i);
   });
 
   it('check local storage', () => {
