@@ -117,10 +117,10 @@ git flow init
 ### Business logics
 
 - All component files in `src/containers` directory are for connecting business logics to UI components.
-
+- All input control hooks are in `src/hooks`: search and add to cart based on options.
 
 <hr />
 
 ### Retrospection
 
-It is the first time for me to apply TDD, although I already had experiences of testing.
+It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
