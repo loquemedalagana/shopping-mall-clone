@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-continue */
 import { ONE_HOUR } from 'src/models/constants';
 import ProductCore from 'src/models/ProductCore';
 import { APP__PRODUCT_LIST_KEY, APP_KEY, isTest } from 'src/env';
@@ -30,7 +32,6 @@ class ProductListData {
       min: 1e9,
     };
 
-    // eslint-disable-next-line no-plusplus
     for (let i = 0; i < this.data.length; i++) {
       const { brand, model, price } = this.data[i];
       if (!brandOptions.includes(brand)) {
@@ -40,7 +41,6 @@ class ProductListData {
         modelOptions.push(model);
       }
 
-      // eslint-disable-next-line no-continue
       if (!price) continue;
 
       priceOptions.max = Math.max(priceOptions.max, Number(price));

@@ -74,9 +74,7 @@ const SearchSection = () => {
             autoSelect
             autoComplete
           />
-          {/*
-          TODO: Searching based on model name is not developed.
-            <SearchInput
+          <SearchInput
             label="Modelo..."
             name={constants.NAME__SEARCH_INPUT__MODEL}
             value={searchController.model}
@@ -88,7 +86,6 @@ const SearchSection = () => {
             isDisabled
             freeSolo
           />
-          */}
           <RangeInput
             name={constants.NAME__SEARCH_INPUT__MIN_PRICE}
             value={searchController.minPrice}

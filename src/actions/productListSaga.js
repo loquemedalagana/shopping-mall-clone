@@ -11,33 +11,33 @@ export const getFilterDataByPrice = (productList, { max: maxPrice, min: minPrice
 };
 
 export function* loadProductList() {
-  let productListDataFromStore = getProductListDataFromStorage();
+  let productListDataFromStorage = getProductListDataFromStorage();
   const productListState = yield select(selectProductListState);
 
   if (
     productListState.data &&
-    productListDataFromStore?.data &&
-    productListState.data.length === productListDataFromStore.data.length
+    productListDataFromStorage?.data &&
+    productListState.data.length === productListDataFromStorage.data.length
   ) {
     put(actions.getReachedEnd());
   }
 
   try {
-    if (!productListDataFromStore || productListDataFromStore.isExpired()) {
+    if (!productListDataFromStorage || productListDataFromStorage.isExpired()) {
       const data = yield call(restApiProductList);
       saveFetchedProductListData(data);
-      productListDataFromStore = getProductListDataFromStorage();
+      productListDataFromStorage = getProductListDataFromStorage();
     }
 
     const { page, searchOptions, searchKeyword } = productListState;
 
     if (!searchOptions) {
-      yield put(actions.loadSearchOptions(productListDataFromStore.getOptionsList()));
+      yield put(actions.loadSearchOptions(productListDataFromStorage.getOptionsList()));
     }
 
     let productListData = isTest()
-      ? productListDataFromStore.data
-      : getFilterDataByPrice(productListDataFromStore.data, searchKeyword.price);
+      ? productListDataFromStorage.data
+      : getFilterDataByPrice(productListDataFromStorage.data, searchKeyword.price);
 
     if (searchKeyword.brand) {
       productListData = productListData.filter(productData => productData.brand === searchKeyword.brand);
