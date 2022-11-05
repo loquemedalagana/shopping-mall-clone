@@ -78,11 +78,6 @@ const useSearchController = () => {
 
   useEffect(() => {
     dispatch(actions.searchProductBrand(brandInput));
-    if (brandInput && brand !== brandInput) {
-      _setIsBrandError(true);
-    } else if (brand === brandInput) {
-      _setIsBrandError(false);
-    }
   }, [brandInput]);
 
   useEffect(() => {

@@ -69,15 +69,15 @@ export function* watchLoadProductList() {
 }
 
 export function* searchProductModel() {
-  yield debounce(2000, actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel);
+  yield takeLatest(actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel);
 }
 
 export function* searchProductBrand() {
-  yield debounce(2000, actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand);
+  yield takeLatest(actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand);
 }
 
 export function* searchProductPrice() {
-  yield debounce(2000, actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
+  yield takeLatest(actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
 }
 
 export function* watchUpdateProductList() {
