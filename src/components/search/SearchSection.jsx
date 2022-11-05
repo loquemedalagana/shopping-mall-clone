@@ -70,13 +70,10 @@ const SearchSection = () => {
             inputValue={searchController.brandInput}
             onInputChange={searchController.handleChangeBrandInput}
             options={searchController?.searchOptions?.brand}
-            isError={searchController.isBrandError}
             autoSelect
             autoComplete
           />
-          {/*
-          TODO: Searching based on model name is not developed.
-            <SearchInput
+          <SearchInput
             label="Modelo..."
             name={constants.NAME__SEARCH_INPUT__MODEL}
             value={searchController.model}
@@ -84,11 +81,8 @@ const SearchSection = () => {
             inputValue={searchController.modelInput}
             onInputChange={searchController.handleChangeModelInput}
             options={searchController?.searchOptions?.model}
-            isError={searchController.isModelError}
-            isDisabled
             freeSolo
           />
-          */}
           <RangeInput
             name={constants.NAME__SEARCH_INPUT__MIN_PRICE}
             value={searchController.minPrice}

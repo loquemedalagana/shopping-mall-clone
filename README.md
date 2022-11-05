@@ -69,6 +69,21 @@ git flow init
 - [add product detail UI](https://github.com/loquemedalagana/shopping-mall-clone/commit/deb561c6d91354c294097a9165350b40eef529b6)
 - [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-clone/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
 - [show product count](https://github.com/loquemedalagana/shopping-mall-clone/commit/5846d0ba78a9d20ac009518b38d00bb3888ea012)
+- [add search based on model](https://github.com/loquemedalagana/shopping-mall-clone/pull/14/files)
+
+
+<hr />
+
+### Main features
+
+#### Load Data - `session storage`
+
+#### Search
+
+#### Add to cart - `local storage`
+
+
+<hr />
 
 ### Test
 
@@ -148,7 +163,6 @@ git flow init
 ### 남은 기능
 
 - app saga에서 만료된 데이터 지우기
-- 모델명으로 검색하는 기능 => 브랜드를 선택하면 거기에 맞는 모델이 목록에 생김
 - 정렬??
 
 ### Retrospection

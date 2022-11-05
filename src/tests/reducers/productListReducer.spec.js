@@ -63,14 +63,75 @@ describe('product list reducer test', () => {
     });
   });
 
-  it('get search keyword model', () => {
-    expect(productListReducer(initialState, actions.searchProductModel('Liquid Z6 Plus'))).toEqual({
+  it('get search keyword model (1)', () => {
+    const sampleSearchKeyword = 'liqui';
+    expect(productListReducer(initialState, actions.searchProductModel(sampleSearchKeyword))).toEqual({
       ...initialState,
       searchKeyword: {
         ...initialState.searchKeyword,
-        model: 'Liquid Z6 Plus',
+        model: sampleSearchKeyword,
       },
     });
+    const reg = new RegExp(sampleSearchKeyword, 'i');
+    expect(reg.test('Liquid Express E320')).toEqual(true);
+    expect(reg.test('beTouch E210')).toEqual(false);
+  });
+
+  it('get search keyword model (2)', () => {
+    const sampleSearchKeyword = 'min';
+    expect(productListReducer(initialState, actions.searchProductModel(sampleSearchKeyword))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: sampleSearchKeyword,
+      },
+    });
+    const reg = new RegExp(sampleSearchKeyword, 'i');
+    expect(reg.test('Liquid mini E310')).toEqual(true);
+    expect(reg.test('beTouch E210')).toEqual(false);
+  });
+
+  it('get search keyword model (3)', () => {
+    const sampleSearchKeyword = 'touch';
+    expect(productListReducer(initialState, actions.searchProductModel(sampleSearchKeyword))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: sampleSearchKeyword,
+      },
+    });
+    const reg = new RegExp(sampleSearchKeyword, 'i');
+    expect(reg.test('beTouch E210')).toEqual(true);
+    expect(reg.test('Iconia Tab A500')).toEqual(false);
+  });
+
+  it('get search keyword model (4)', () => {
+    const sampleSearchKeyword = 'a501';
+    expect(productListReducer(initialState, actions.searchProductModel(sampleSearchKeyword))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: sampleSearchKeyword,
+      },
+    });
+    const reg = new RegExp(sampleSearchKeyword, 'i');
+    expect(reg.test('Iconia Tab A501')).toEqual(true);
+    expect(reg.test('Iconia Tab A500')).toEqual(false);
+  });
+
+  it('get search keyword model (5)', () => {
+    const sampleSearchKeyword = 'a50';
+    expect(productListReducer(initialState, actions.searchProductModel(sampleSearchKeyword))).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: sampleSearchKeyword,
+      },
+    });
+    const reg = new RegExp(sampleSearchKeyword, 'i');
+    expect(reg.test('Iconia Tab A501')).toEqual(true);
+    expect(reg.test('Iconia Tab A500')).toEqual(true);
+    expect(reg.test('Iconia Tab A511')).toEqual(false);
   });
 
   it('get search keyword brand', () => {

@@ -11,36 +11,42 @@ export const getFilterDataByPrice = (productList, { max: maxPrice, min: minPrice
 };
 
 export function* loadProductList() {
-  let productListDataFromStore = getProductListDataFromStorage();
+  let productListDataFromStorage = getProductListDataFromStorage();
   const productListState = yield select(selectProductListState);
 
   if (
     productListState.data &&
-    productListDataFromStore?.data &&
-    productListState.data.length === productListDataFromStore.data.length
+    productListDataFromStorage?.data &&
+    productListState.data.length === productListDataFromStorage.data.length
   ) {
     put(actions.getReachedEnd());
   }
 
   try {
-    if (!productListDataFromStore || productListDataFromStore.isExpired()) {
+    if (!productListDataFromStorage || productListDataFromStorage.isExpired()) {
       const data = yield call(restApiProductList);
       saveFetchedProductListData(data);
-      productListDataFromStore = getProductListDataFromStorage();
+      productListDataFromStorage = getProductListDataFromStorage();
     }
 
     const { page, searchOptions, searchKeyword } = productListState;
 
     if (!searchOptions) {
-      yield put(actions.loadSearchOptions(productListDataFromStore.getOptionsList()));
+      yield put(actions.loadSearchOptions(productListDataFromStorage.getOptionsList()));
     }
 
     let productListData = isTest()
-      ? productListDataFromStore.data
-      : getFilterDataByPrice(productListDataFromStore.data, searchKeyword.price);
+      ? productListDataFromStorage.data
+      : getFilterDataByPrice(productListDataFromStorage.data, searchKeyword.price);
 
     if (searchKeyword.brand) {
-      productListData = productListData.filter(productData => productData.brand === searchKeyword.brand);
+      const reg = new RegExp(searchKeyword.brand, 'i');
+      productListData = productListData.filter(productData => reg.test(productData.brand));
+    }
+
+    if (searchKeyword.model) {
+      const reg = new RegExp(searchKeyword.model, 'i');
+      productListData = productListData.filter(productData => reg.test(productData.model));
     }
 
     const currentPageProductList = productListData.slice(
@@ -63,15 +69,15 @@ export function* watchLoadProductList() {
 }
 
 export function* searchProductModel() {
-  yield debounce(2000, actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel);
+  yield takeLatest(actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel);
 }
 
 export function* searchProductBrand() {
-  yield debounce(2000, actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand);
+  yield takeLatest(actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand);
 }
 
 export function* searchProductPrice() {
-  yield debounce(2000, actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
+  yield takeLatest(actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
 }
 
 export function* watchUpdateProductList() {
