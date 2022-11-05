@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
@@ -9,18 +9,24 @@ const SearchInputBox = styled.div`
   min-width: 200px;
 `;
 
-const SearchInput = ({
-  name,
-  label,
-  value,
-  options,
-  onChange,
-  inputValue,
-  onInputChange,
-  isError,
-  isDisabled,
-  ...rest
-}) => {
+const SearchInput = ({ name, label, value, options, onChange, inputValue, onInputChange, ...rest }) => {
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const $optionsElement = document.getElementById(`${name}-listbox`);
+    const $optionsElementsPresentation = document.querySelectorAll('[role="presentation"]');
+
+    if (!$optionsElement && $optionsElementsPresentation.length > 0) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+
+    return () => {
+      setError(false);
+    };
+  }, [inputValue]);
+
   return (
     <SearchInputBox>
       <Autocomplete
@@ -35,8 +41,7 @@ const SearchInput = ({
           return (
             <TextField
               {...params}
-              disabled={isDisabled}
-              error={isError}
+              error={error}
               label={label}
               InputProps={{
                 ...params.InputProps,
@@ -52,8 +57,6 @@ const SearchInput = ({
 };
 
 SearchInput.propTypes = {
-  isError: PropTypes.bool,
-  isDisabled: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.string),
   value: PropTypes.string,
   inputValue: PropTypes.string,
