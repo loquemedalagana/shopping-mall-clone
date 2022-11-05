@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as actions from 'src/actions/productListActions';
@@ -17,8 +17,6 @@ const useSearchController = () => {
   const [maxPrice, _setMaxPrice] = useState(searchKeyword?.price?.max || searchOptions?.price?.max || 1000);
   const [minPrice, _setMinPrice] = useState(searchKeyword?.price?.min || searchOptions?.price?.min || 0);
 
-  const [isBrandError, _setIsBrandError] = useState(false);
-  const [isModelError, _setIsModelError] = useState(false);
   const [isPriceInputError, _setIsPriceInputError] = useState(false);
 
   const [isInputValuesChanged, _setIsInputValuesChanged] = useState(false);
@@ -54,7 +52,7 @@ const useSearchController = () => {
   };
 
   useEffect(() => {
-    if (!searchOptions || isPriceInputError || isBrandError) {
+    if (!searchOptions || isPriceInputError) {
       return;
     }
 
@@ -99,8 +97,6 @@ const useSearchController = () => {
     handleChangeMaxPrice,
     handleChangeMinPrice,
     isPriceInputError,
-    isBrandError,
-    isModelError,
   };
 };
 
