@@ -40,7 +40,13 @@ export function* loadProductList() {
       : getFilterDataByPrice(productListDataFromStorage.data, searchKeyword.price);
 
     if (searchKeyword.brand) {
-      productListData = productListData.filter(productData => productData.brand === searchKeyword.brand);
+      const reg = new RegExp(searchKeyword.brand, 'i');
+      productListData = productListData.filter(productData => reg.test(productData.brand));
+    }
+
+    if (searchKeyword.model) {
+      const reg = new RegExp(searchKeyword.model, 'i');
+      productListData = productListData.filter(productData => reg.test(productData.model));
     }
 
     const currentPageProductList = productListData.slice(
