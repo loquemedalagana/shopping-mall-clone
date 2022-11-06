@@ -3,8 +3,7 @@ import ProductDetailData, {
   getFetchedProductDetailDataFromStorage,
   saveFetchedProductDetailData,
 } from 'src/models/ProductDetailData';
-import mockedItemList from 'src/tests/__mocks__/mockedItemList';
-import mockedItemDetail from 'src/tests/__mocks__/mockedItemDetail';
+import { mockedItemDetail, mockedItemList } from 'src/tests/__mocks__/mockedFetchedData';
 import { createMockSessionStorage } from 'src/tests/__mocks__/mockStorage';
 
 describe('session storage test', () => {

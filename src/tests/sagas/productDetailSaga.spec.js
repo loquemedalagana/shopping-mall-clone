@@ -5,7 +5,8 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { restApiProductDetail } from 'src/http/api';
 import * as actions from 'src/actions/productDetailActions';
-import mockedItemDetail, { definedMockedItemDetail } from 'src/tests/__mocks__/mockedItemDetail';
+import { mockedItemDetail } from 'src/tests/__mocks__/mockedFetchedData';
+import { definedMockedItemDetail } from 'src/tests/__mocks__/mockedItemDetail';
 import { loadProductDetail } from 'src/actions/productDetailSaga';
 
 import { initialState, selectProductDetailState } from 'src/stores/productDetailStore';
