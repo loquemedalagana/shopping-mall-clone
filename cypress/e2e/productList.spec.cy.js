@@ -48,6 +48,16 @@ describe('to test search function', () => {
       );
   });
 
+  it('to get a search element with valid brand keywords (2)', () => {
+    const modelKeyword2 = 'Liquid E3';
+    const reg = new RegExp(modelKeyword2, 'i');
+    const expectedList = mockedItemList.filter(data => reg.test(data.model));
+    cy.get(`#${NAME__SEARCH_INPUT__MODEL}`).if().type(modelKeyword2);
+    cy.window().its('store').invoke('getState').its('productList').its('loading').should('eq', true);
+    cy.wait(3000);
+    cy.window().its('store').invoke('getState').its('productList').its('data').should('deep.equal', expectedList);
+  });
+
   it('to get a search element with invalid brand keywords', () => {
     const invalidKeyword = 'ddsjsk';
     const reg = new RegExp(invalidKeyword, 'i');
