@@ -1,7 +1,8 @@
 import ProductListData from 'src/models/ProductListData';
 import ProductDetailData from 'src/models/ProductDetailData';
 
-import mockedItemList, { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
+import { mockedItemList } from 'src/tests/__mocks__/mockedFetchedData';
+import { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
 import mockedItemDetail, { definedMockedItemDetail } from 'src/tests/__mocks__/mockedItemDetail';
 import { ONE_HOUR } from 'src/models/constants';
 

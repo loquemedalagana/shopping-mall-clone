@@ -5,7 +5,8 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { restApiProductList } from 'src/http/api';
 import * as actions from 'src/actions/productListActions';
-import mockedItemList, { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
+import { mockedItemList } from 'src/tests/__mocks__/mockedFetchedData';
+import { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
 import {
   loadProductList,
   searchProductModel,

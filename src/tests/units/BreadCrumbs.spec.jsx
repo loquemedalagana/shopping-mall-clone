@@ -4,7 +4,7 @@ import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 
 import BreadCrumbs from 'src/components/header/BreadCrumbs';
 import ProviderForTests from 'src/tests/utils/ProviderForTests';
-import mockedItemList from 'src/tests/__mocks__/mockedItemList';
+import { mockedItemList } from 'src/tests/__mocks__/mockedFetchedData';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
