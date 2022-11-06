@@ -6,10 +6,8 @@ import { APP__CART_COUNT_KEY, APP_KEY } from '../../src/env';
 describe('visit routes', () => {
   it('visit home and redirect to /products link', () => {
     cy.visit(URL_ROOT);
-    cy.location('pathname')
-      .should('equal', `${URL_ROOT + URL_PRODUCTS}`)
-      .else()
-      .log('the connection is bad...');
+    cy.wait(3000);
+    cy.location('pathname').should('equal', `${URL_ROOT + URL_PRODUCTS}`);
   });
 
   it('check breadcrumbs links function', () => {
