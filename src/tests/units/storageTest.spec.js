@@ -13,12 +13,7 @@ describe('session storage test', () => {
     createMockSessionStorage({});
     saveFetchedProductListData(mockedItemList);
     const productListDataFromStorage = getProductListDataFromStorage();
-    expect(productListDataFromStorage.data).toEqual(sampleProductListData.data);
-    expect(sampleProductListData.fetchedTime.getTime()).toBeLessThanOrEqual(
-      productListDataFromStorage.fetchedTime.getTime(),
-    );
 
-    productListDataFromStorage.changeTimeForTest();
     expect(productListDataFromStorage.isExpired()).toEqual(true);
   });
 
