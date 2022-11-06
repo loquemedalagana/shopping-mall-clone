@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { saveErrorMessage, resetErrorMessage } from 'src/actions/appActions';
+import { readCachedData, removeCachedData } from 'src/actions/appActions';
 
 export const initialState = {
   error: null,
@@ -12,18 +12,6 @@ const appSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(saveErrorMessage, (state, action) => {
-        return {
-          ...state,
-          error: action.payload.error,
-        };
-      })
-      .addCase(resetErrorMessage, state => {
-        return {
-          ...state,
-          error: null,
-        };
-      })
       .addDefaultCase(state => {
         return state;
       });

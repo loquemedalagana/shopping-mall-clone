@@ -1,13 +1,11 @@
 import { all, fork, take } from 'redux-saga/effects';
 
-import { SAVE__ERROR_MESSAGE, RESET__ERROR_MESSAGE } from 'src/actions/appActions';
+import * as actions from 'src/actions/appActions';
+import { APP_KEY, isTest, APP__CART_COUNT_KEY } from 'src/env';
 
-export function* saveErrorMessage() {
-  yield take(SAVE__ERROR_MESSAGE);
-}
-
-export function* resetErrorMessage() {
-  yield take(RESET__ERROR_MESSAGE);
+export function* readCachedData() {
+  const productIds = Object.keys(sessionStorage).filter(key => key !== APP_KEY);
+  yield;
 }
 
 export default function* rootAppSaga() {

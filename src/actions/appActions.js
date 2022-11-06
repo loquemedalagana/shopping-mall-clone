@@ -1,13 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const SAVE__ERROR_MESSAGE = 'SAVE__ERROR_MESSAGE';
-export const RESET__ERROR_MESSAGE = 'RESTORE__ERROR_MESSAGE';
+export const READ__CACHED_DATA = 'READ__CACHED_DATA';
+export const REMOVE__CACHED_DATA = 'REMOVE__CACHED_DATA';
 
-export const saveErrorMessage = createAction(SAVE__ERROR_MESSAGE, error => {
+export const readCachedData = createAction(READ__CACHED_DATA);
+export const removeCachedData = createAction(REMOVE__CACHED_DATA, productId => {
   return {
     payload: {
-      error,
+      productId,
     },
   };
 });
-export const resetErrorMessage = createAction(RESET__ERROR_MESSAGE);
