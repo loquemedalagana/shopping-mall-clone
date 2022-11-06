@@ -1,22 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Provider as ReduxProvider } from 'react-redux';
-import { ThemeProvider } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
-import rootStore from 'src/stores/rootStore';
+import * as actions from 'src/actions/appActions';
 import routes from 'src/routes/routes';
-import MuiTheme from 'src/styles/theme';
 
 export const router = createBrowserRouter(routes);
 
 function App() {
-  return (
-    <ThemeProvider theme={MuiTheme}>
-      <ReduxProvider store={rootStore}>
-        <RouterProvider router={router} />
-      </ReduxProvider>
-    </ThemeProvider>
-  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actions.readCachedData());
+  }, []);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
