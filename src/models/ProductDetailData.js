@@ -11,40 +11,27 @@ class ProductDetailData {
   isExpired() {
     return new Date().getTime() - this.fetchedTime.getTime() >= ONE_HOUR;
   }
-
-  changeTimeForTest() {
-    if (!isTest()) {
-      throw new Error('This method should only be used in the test env.');
-    }
-    this.fetchedTime = new Date(new Date().getTime() - (ONE_HOUR + 10));
-  }
 }
 
 export default ProductDetailData;
 
 export const saveFetchedProductDetailData = data => {
-  const storageItems = JSON.parse(sessionStorage.getItem(APP_KEY));
   const currentTime = new Date();
+  const expiredTimeForTest = new Date(new Date().getTime() - (ONE_HOUR + 10));
   sessionStorage.setItem(
-    APP_KEY,
+    data.id,
     JSON.stringify({
-      ...storageItems,
-      [data.id]: {
-        data,
-        savedTime: currentTime,
-      },
+      data,
+      savedTime: isTest() ? expiredTimeForTest : currentTime,
     }),
   );
 };
 
 export const getFetchedProductDetailDataFromStorage = itemId => {
-  const stringifyData = sessionStorage.getItem(APP_KEY);
+  const stringifyData = sessionStorage.getItem(itemId);
   if (!stringifyData) return undefined;
   const storageItems = JSON.parse(stringifyData);
-
-  if (!storageItems[itemId]) return undefined;
-
-  return new ProductDetailData(storageItems[itemId].data, new Date(storageItems[itemId].savedTime));
+  return new ProductDetailData(storageItems.data, new Date(storageItems.savedTime));
 };
 
 export const saveTotalCountOfProductsInCartInStorage = ({ count }) => {

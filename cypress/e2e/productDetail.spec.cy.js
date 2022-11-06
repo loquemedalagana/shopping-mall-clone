@@ -24,11 +24,7 @@ describe('e2e test for product detail page', () => {
   });
 
   it('check session storage', () => {
-    cy.window()
-      .its('sessionStorage')
-      .invoke('getItem', APP_KEY)
-      .should('include', sampleId)
-      .should('include', JSON.stringify(mockedItemDetail));
+    cy.window().its('sessionStorage').invoke('getItem', sampleId).should('include', JSON.stringify(mockedItemDetail));
   });
 
   it('should add a cart', () => {

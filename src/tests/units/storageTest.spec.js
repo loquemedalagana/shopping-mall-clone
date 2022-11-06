@@ -29,11 +29,7 @@ describe('session storage test', () => {
     saveFetchedProductDetailData(mockedItemDetail);
     const productDetailDataFromStorage = getFetchedProductDetailDataFromStorage(mockedItemDetail.id);
     expect(productDetailDataFromStorage.data).toEqual(sampleProductDetailData.data);
-    expect(sampleProductDetailData.fetchedTime.getTime()).toBeLessThanOrEqual(
-      productDetailDataFromStorage.fetchedTime.getTime(),
-    );
 
-    productDetailDataFromStorage.changeTimeForTest();
     expect(productDetailDataFromStorage.isExpired()).toEqual(true);
   });
 
