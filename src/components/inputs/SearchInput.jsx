@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
@@ -9,9 +9,18 @@ const SearchInputBox = styled.div`
   min-width: 200px;
 `;
 
-const SearchInput = ({ name, label, value, options, onChange, inputValue, onInputChange, ...rest }) => {
-  const [error, setError] = useState(false);
-
+const SearchInput = ({
+  name,
+  label,
+  value,
+  options,
+  onChange,
+  inputValue,
+  onInputChange,
+  error,
+  setError,
+  ...rest
+}) => {
   useEffect(() => {
     const $optionsElement = document.getElementById(`${name}-listbox`);
     const $optionsElementsPresentation = document.querySelectorAll('[role="presentation"]');
@@ -67,6 +76,8 @@ SearchInput.propTypes = {
   freeSolo: PropTypes.bool,
   autoSelect: PropTypes.bool,
   autoComplete: PropTypes.bool,
+  error: PropTypes.bool,
+  setError: PropTypes.func,
 };
 
 export default SearchInput;
