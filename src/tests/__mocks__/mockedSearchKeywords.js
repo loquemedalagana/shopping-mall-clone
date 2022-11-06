@@ -1,4 +1,4 @@
-exports.modelKeyword = 'liqui';
+exports.modelKeyword = 'tab';
 exports.priceKeyword = {
   max: 350,
   min: 250,
