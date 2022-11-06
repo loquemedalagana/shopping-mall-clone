@@ -45,9 +45,15 @@ git flow init
 
 ## Routes
 
+`/`
+
+- redirect to `products`
+- RESET search inputs
+
 `/products`
 
 - to show product list
+- DO NOT reset search inputs
 
 `/:productId`
 
@@ -69,8 +75,8 @@ git flow init
 - [add product detail UI](https://github.com/loquemedalagana/shopping-mall-clone/commit/deb561c6d91354c294097a9165350b40eef529b6)
 - [fix malfunctioned search functions](https://github.com/loquemedalagana/shopping-mall-clone/commit/efffdf065e2fd78b5f9fc6a330b00eed6feb28a6)
 - [show product count](https://github.com/loquemedalagana/shopping-mall-clone/commit/5846d0ba78a9d20ac009518b38d00bb3888ea012)
-- [add search based on model](https://github.com/loquemedalagana/shopping-mall-clone/pull/14/files)
-
+- [add search based on model](https://github.com/loquemedalagana/shopping-mall-clone/pull/16/files)
+- [add search input reset feature](https://github.com/loquemedalagana/shopping-mall-clone/pull/17/files)
 
 <hr />
 
@@ -81,7 +87,6 @@ git flow init
 #### Search
 
 #### Add to cart - `local storage`
-
 
 <hr />
 

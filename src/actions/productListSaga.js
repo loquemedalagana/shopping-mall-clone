@@ -10,6 +10,10 @@ export const getFilterDataByPrice = (productList, { max: maxPrice, min: minPrice
   return productList.filter(productData => productData.price >= minPrice && productData.price <= maxPrice);
 };
 
+export function* setSearchInputError() {
+  yield takeLatest(actions.SET__SEARCH_INPUT_ERROR, actions.setSearchInputError);
+}
+
 export function* loadProductList() {
   let productListDataFromStorage = getProductListDataFromStorage();
   const productListState = yield select(selectProductListState);
@@ -91,5 +95,6 @@ export default function* rootProductListSaga() {
     fork(searchProductModel),
     fork(searchProductBrand),
     fork(watchUpdateProductList),
+    fork(setSearchInputError),
   ]);
 }

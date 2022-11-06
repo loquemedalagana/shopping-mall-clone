@@ -13,6 +13,7 @@ export const initialState = {
     brand: undefined,
     model: undefined,
   },
+  isSearchInputError: false,
   fetchedTime: undefined,
   error: null,
   loading: false,
@@ -96,6 +97,12 @@ const productListSlice = createSlice({
         return {
           ...state,
           isReachedEnd: true,
+        };
+      })
+      .addCase(actions.setSearchInputError, (state, action) => {
+        return {
+          ...state,
+          isSearchInputError: action.payload.isSearchInputError,
         };
       })
       .addDefaultCase(state => {

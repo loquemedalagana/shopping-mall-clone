@@ -1,13 +1,16 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 
 import LinkRouter from 'src/components/header/LinkRouter';
 import { URL_ROOT, URL_PRODUCTS } from 'src/routes/routeURL';
+import { selectProductDetailState } from 'src/stores/productDetailStore';
 
 const BreadCrumbs = () => {
   const location = useLocation();
+  const productDetailState = useSelector(selectProductDetailState);
   const pathnames = location.pathname.split('/').filter(path => path);
   const is404 = !pathnames.includes(URL_PRODUCTS);
 
@@ -20,14 +23,17 @@ const BreadCrumbs = () => {
         pathnames.map((value, index) => {
           const lastIndex = index === pathnames.length - 1;
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+          const currentValue = `${value.slice(0, 1).toUpperCase()}${value.slice(1)}`;
 
           return lastIndex ? (
             <Typography color="#277BC0" key={to}>
-              {`${value.slice(0, 1).toUpperCase()}${value.slice(1)}`}
+              {productDetailState?.data && currentValue === productDetailState.data.id
+                ? productDetailState.data.model
+                : currentValue}
             </Typography>
           ) : (
             <LinkRouter underline="hover" color="inherit" to={to} key={to}>
-              {`${value.slice(0, 1).toUpperCase()}${value.slice(1)}`}
+              {currentValue}
             </LinkRouter>
           );
         })}

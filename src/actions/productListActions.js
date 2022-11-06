@@ -14,6 +14,8 @@ export const SEARCH__PRODUCT_PRICE = 'SEARCH__PRODUCT_PRICE';
 
 export const UPDATE__PRODUCT_LIST = 'UPDATE__PRODUCT_LIST';
 
+export const SET__SEARCH_INPUT_ERROR = 'SET__SEARCH_INPUT_ERROR';
+
 export const loadProductList = createAction(LOAD__PRODUCT_LIST);
 
 export const loadProductListSuccess = createAction(LOAD__PRODUCT_LIST__SUCCESS, data => {
@@ -69,3 +71,11 @@ export const searchPriceRange = createAction(SEARCH__PRODUCT_PRICE, ({ max, min 
 });
 
 export const updateProductList = createAction(UPDATE__PRODUCT_LIST);
+
+export const setSearchInputError = createAction(SET__SEARCH_INPUT_ERROR, isSearchInputError => {
+  return {
+    payload: {
+      isSearchInputError,
+    },
+  };
+});

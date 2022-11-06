@@ -17,6 +17,8 @@ const useSearchController = () => {
   const [maxPrice, _setMaxPrice] = useState(searchKeyword?.price?.max || searchOptions?.price?.max || 1000);
   const [minPrice, _setMinPrice] = useState(searchKeyword?.price?.min || searchOptions?.price?.min || 0);
 
+  const [isBrandError, setIsBrandError] = useState(false);
+  const [isModelError, setIsModelError] = useState(false);
   const [isPriceInputError, _setIsPriceInputError] = useState(false);
 
   const [isInputValuesChanged, _setIsInputValuesChanged] = useState(false);
@@ -82,6 +84,14 @@ const useSearchController = () => {
     dispatch(actions.searchProductModel(modelInput));
   }, [modelInput]);
 
+  useEffect(() => {
+    if (!isBrandError || !isModelError) {
+      dispatch(actions.setSearchInputError(true));
+    } else {
+      dispatch(actions.setSearchInputError(false));
+    }
+  }, [isBrandError, isModelError]);
+
   return {
     brand,
     model,
@@ -97,6 +107,10 @@ const useSearchController = () => {
     handleChangeMaxPrice,
     handleChangeMinPrice,
     isPriceInputError,
+    isBrandError,
+    isModelError,
+    setIsBrandError,
+    setIsModelError,
   };
 };
 
