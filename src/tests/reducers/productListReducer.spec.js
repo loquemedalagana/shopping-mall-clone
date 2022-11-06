@@ -63,6 +63,29 @@ describe('product list reducer test', () => {
     });
   });
 
+  it('should detect search input error', () => {
+    const sampleSearchKeyword = 'jajaja';
+    expect(
+      productListReducer(
+        {
+          ...initialState,
+          searchKeyword: {
+            ...initialState.searchKeyword,
+            model: sampleSearchKeyword,
+          },
+        },
+        actions.setSearchInputError(true),
+      ),
+    ).toEqual({
+      ...initialState,
+      searchKeyword: {
+        ...initialState.searchKeyword,
+        model: sampleSearchKeyword,
+      },
+      isSearchInputError: true,
+    });
+  });
+
   it('get search keyword model (1)', () => {
     const sampleSearchKeyword = 'liqui';
     expect(productListReducer(initialState, actions.searchProductModel(sampleSearchKeyword))).toEqual({
