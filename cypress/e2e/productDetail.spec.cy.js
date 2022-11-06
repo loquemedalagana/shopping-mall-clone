@@ -3,11 +3,12 @@ import 'cypress-if';
 
 import { URL_PRODUCTS, URL_ROOT } from '../../src/routes/routeURL';
 import { APP_KEY, APP__CART_COUNT_KEY } from '../../src/env';
+import { mockedItemDetail } from '../../src/tests/__mocks__/mockedFetchedData';
 
 describe('e2e test for product detail page', () => {
-  const sampleId = 'qu-cIoRt8Y4ZeQdCuOr4l';
+  const sampleId = mockedItemDetail.id;
 
-  it('visit sample item', () => {
+  beforeEach(() => {
     cy.visit(`${URL_ROOT + URL_PRODUCTS}/${sampleId}`);
   });
 
@@ -19,6 +20,10 @@ describe('e2e test for product detail page', () => {
   });
 
   it('check session storage', () => {
-    cy.window().its('sessionStorage').invoke('getItem', APP_KEY).should('include', sampleId);
+    cy.window()
+      .its('sessionStorage')
+      .invoke('getItem', APP_KEY)
+      .should('include', sampleId)
+      .should('include', JSON.stringify(mockedItemDetail));
   });
 });
