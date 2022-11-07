@@ -49,25 +49,3 @@ class ProductListData {
 }
 
 export default ProductListData;
-
-export const saveFetchedProductListData = data => {
-  const currentTime = new Date();
-  const expiredTimeForTest = new Date(new Date().getTime() - (ONE_HOUR + 10));
-  sessionStorage.setItem(
-    APP__PRODUCT_LIST_KEY,
-    JSON.stringify({
-      data,
-      savedTime: isTest() ? expiredTimeForTest : currentTime,
-    }),
-  );
-};
-
-export const getProductListDataFromStorage = () => {
-  const stringifyData = sessionStorage.getItem(APP__PRODUCT_LIST_KEY);
-
-  if (!stringifyData) return undefined;
-
-  const storageItems = JSON.parse(stringifyData);
-
-  return new ProductListData(storageItems.data, new Date(storageItems.savedTime));
-};

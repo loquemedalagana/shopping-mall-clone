@@ -1,8 +1,10 @@
 import { all, fork, call, put, select, throttle, debounce, takeLatest } from 'redux-saga/effects';
 
-import * as actions from 'src/actions/productListActions';
-import { saveFetchedProductListData, getProductListDataFromStorage } from 'src/models/ProductListData';
+import * as appActions from 'src/actions/appActions';
+import * as productListActions from 'src/actions/productListActions';
+import ProductListData from 'src/models/ProductListData';
 import { restApiProductList } from 'src/http/api';
+import { selectAppState } from 'src/stores/appStore';
 import { PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/productListStore';
 import { isTest } from 'src/env';
 
@@ -11,11 +13,12 @@ export const getFilterDataByPrice = (productList, { max: maxPrice, min: minPrice
 };
 
 export function* setSearchInputError() {
-  yield takeLatest(actions.SET__SEARCH_INPUT_ERROR, actions.setSearchInputError);
+  yield takeLatest(productListActions.SET__SEARCH_INPUT_ERROR, productListActions.setSearchInputError);
 }
 
 export function* loadProductList() {
-  let productListDataFromStorage = getProductListDataFromStorage();
+  const appState = yield select(selectAppState);
+  let productListDataFromStorage = appState.productList;
   const productListState = yield select(selectProductListState);
 
   if (
@@ -23,20 +26,20 @@ export function* loadProductList() {
     productListDataFromStorage?.data &&
     productListState.data.length === productListDataFromStorage.data.length
   ) {
-    put(actions.getReachedEnd());
+    put(productListActions.getReachedEnd());
   }
 
   try {
     if (!productListDataFromStorage || productListDataFromStorage.isExpired()) {
       const data = yield call(restApiProductList);
-      saveFetchedProductListData(data);
-      productListDataFromStorage = getProductListDataFromStorage();
+      yield put(appActions.cacheProductList(data));
+      productListDataFromStorage = new ProductListData(data, new Date());
     }
 
     const { page, searchOptions, searchKeyword } = productListState;
 
     if (!searchOptions) {
-      yield put(actions.loadSearchOptions(productListDataFromStorage.getOptionsList()));
+      yield put(productListActions.loadSearchOptions(productListDataFromStorage.getOptionsList()));
     }
 
     let productListData = isTest()
@@ -59,33 +62,33 @@ export function* loadProductList() {
     );
 
     if (currentPageProductList.length + productListState.data.length === productListData.length) {
-      yield put(actions.getReachedEnd());
+      yield put(productListActions.getReachedEnd());
     }
 
-    yield put(actions.loadProductListSuccess(currentPageProductList));
+    yield put(productListActions.loadProductListSuccess(currentPageProductList));
   } catch (e) {
-    yield put(actions.loadProductListFail(e));
+    yield put(productListActions.loadProductListFail(e));
   }
 }
 
 export function* watchLoadProductList() {
-  yield throttle(3000, actions.LOAD__PRODUCT_LIST, loadProductList);
+  yield throttle(3000, productListActions.LOAD__PRODUCT_LIST, loadProductList);
 }
 
 export function* searchProductModel() {
-  yield takeLatest(actions.SEARCH__PRODUCT_MODEL, actions.searchProductModel);
+  yield takeLatest(productListActions.SEARCH__PRODUCT_MODEL, productListActions.searchProductModel);
 }
 
 export function* searchProductBrand() {
-  yield takeLatest(actions.SEARCH__PRODUCT_BRAND, actions.searchProductBrand);
+  yield takeLatest(productListActions.SEARCH__PRODUCT_BRAND, productListActions.searchProductBrand);
 }
 
 export function* searchProductPrice() {
-  yield takeLatest(actions.SEARCH__PRODUCT_PRICE, actions.searchPriceRange);
+  yield takeLatest(productListActions.SEARCH__PRODUCT_PRICE, productListActions.searchPriceRange);
 }
 
 export function* watchUpdateProductList() {
-  yield debounce(2000, actions.UPDATE__PRODUCT_LIST, loadProductList);
+  yield debounce(2000, productListActions.UPDATE__PRODUCT_LIST, loadProductList);
 }
 
 export default function* rootProductListSaga() {

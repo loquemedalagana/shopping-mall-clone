@@ -1,29 +1,34 @@
 import { all, fork, call, put, select, takeEvery } from 'redux-saga/effects';
 
-import * as actions from 'src/actions/productDetailActions';
+import * as appActions from 'src/actions/appActions';
+import * as productDetailActions from 'src/actions/productDetailActions';
 import { restApiProductDetail } from 'src/http/api';
-import { saveFetchedProductDetailData, getFetchedProductDetailDataFromStorage } from 'src/models/ProductDetailData';
 import { selectProductDetailState } from 'src/stores/productDetailStore';
+import { selectAppState } from 'src/stores/appStore';
 
 export function* loadProductDetail() {
   const productDetailState = yield select(selectProductDetailState);
-  let productDetailDataFromStore = getFetchedProductDetailDataFromStorage(productDetailState.productId);
+  const appState = yield select(selectAppState);
+  const productDetailDataFromStore = appState.productDetail.filter(
+    productDetailData => productDetailData.data.id === productDetailState.productId,
+  )[0];
 
   try {
     if (!productDetailDataFromStore || productDetailDataFromStore.isExpired()) {
       const data = yield call(restApiProductDetail, productDetailState.productId);
-      saveFetchedProductDetailData(data);
-      productDetailDataFromStore = getFetchedProductDetailDataFromStorage(productDetailState.productId);
+      yield put(appActions.cacheProductDetail(data));
+      yield put(productDetailActions.loadProductDetailSuccess(data));
+      return;
     }
 
-    yield put(actions.loadProductDetailSuccess(productDetailDataFromStore?.data));
+    yield put(productDetailActions.loadProductDetailSuccess(productDetailDataFromStore?.data));
   } catch (e) {
-    yield put(actions.loadProductDetailFail(e));
+    yield put(productDetailActions.loadProductDetailFail(e));
   }
 }
 
 export function* watchLoadProductDetail() {
-  yield takeEvery(actions.LOAD__PRODUCT_DETAIL, loadProductDetail);
+  yield takeEvery(productDetailActions.LOAD__PRODUCT_DETAIL, loadProductDetail);
 }
 
 export default function* rootProductDetailSaga() {
