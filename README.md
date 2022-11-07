@@ -43,7 +43,7 @@ git flow init
 
 <hr />
 
-## Routes
+## Routes [codes](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/routes)
 
 `/`
 
@@ -110,6 +110,8 @@ git flow init
 - `saga`, `reducers`, `models` are tested via `Jest`.
 - `UI` and `e2e` tests are conducted by `cypress`.
 - [All the automated test logs are available in this link](https://github.com/loquemedalagana/shopping-mall-clone/actions).
+- [unit, functional test codes link using jest](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/tests)
+- [e2e test codes link using cypress](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/cypress/e2e)
 
 <hr/>
 
@@ -152,11 +154,11 @@ git flow init
 
 - All components in the `src/components/**Page.jsx` format
 
-#### Container Components `src/containers`
+#### Container Components `src/containers` [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/containers)
 
 - The container components connect business logic to UI components.
 
-#### Model Classes `src/models`
+#### Model Classes `src/models` [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/models)
 
 - `itemNamesMapp` is for `UI` converting `keys` into `spanish matched terms`.
 - `ProductCore` is for `item` for `products`.
@@ -169,13 +171,26 @@ git flow init
 ### Business logics
 
 - All component files in `src/containers` directory are for connecting business logics to UI components.
+  - [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/containers)
 - All input control hooks are in `src/hooks`: search and add to cart based on options.
+  - [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/hooks)
 
 ### State Management
+
+> #### code link
+>
+> [sagas, actions](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/actions)
+>
+> - [tests](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/tests/sagas)
+>
+> [stores, reducers, provider](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/stores)
+>
+> - [tests](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/tests/reducers)
 
 #### App - `Persistent store` using `Session Storage`
 
 - Every fetched data is saved in the app state.
+- In the `app saga`, the cached data will be deleted after 1 hour.
 
 #### ProductList
 
