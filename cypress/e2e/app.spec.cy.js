@@ -13,10 +13,11 @@ describe('visit routes', () => {
     cy.get('nav').contains(/home/i);
   });
 
-
   it('check session storage', () => {
-    cy.window()
-      .its('sessionStorage')
-      .invoke('getItem', 'persist.app')
+    cy.window().its('sessionStorage').invoke('getItem', 'persist.app');
+  });
+
+  it('check local storage', () => {
+    cy.window().its('localStorage').invoke('getItem', 'persist:cart');
   });
 });

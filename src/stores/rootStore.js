@@ -18,11 +18,16 @@ const appPersistentConfig = {
   storage: storageSession,
 };
 
+const cartPersistentConfig = {
+  key: 'cart',
+  storage,
+};
+
 const rootReducer = combineReducers({
   app: persistReducer(appPersistentConfig, appReducer),
   productList: productListReducer,
   productDetail: productDetailReducer,
-  cart: cartReducer,
+  cart: persistReducer(cartPersistentConfig, cartReducer),
 });
 
 const rootStore = configureStore({
