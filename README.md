@@ -23,13 +23,13 @@ yarn cypress
 yarn test
 ```
 
-# to build
+### to build
 
 ```bash
 yarn build
 ```
 
-### # git flow
+### git flow
 
 ```bash
 git flow init
@@ -43,7 +43,7 @@ git flow init
 
 <hr />
 
-## Routes
+## Routes [codes](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/routes)
 
 `/`
 
@@ -82,6 +82,7 @@ git flow init
 - [add search based on model](https://github.com/loquemedalagana/shopping-mall-clone/pull/16/files)
 - [add search input reset feature](https://github.com/loquemedalagana/shopping-mall-clone/pull/17/files)
 - [incorporate storage management codes into persistent store](https://github.com/loquemedalagana/shopping-mall-clone/pull/25)
+- [add cache management](https://github.com/loquemedalagana/shopping-mall-clone/pull/27)
 
 <hr />
 
@@ -110,6 +111,8 @@ git flow init
 - `saga`, `reducers`, `models` are tested via `Jest`.
 - `UI` and `e2e` tests are conducted by `cypress`.
 - [All the automated test logs are available in this link](https://github.com/loquemedalagana/shopping-mall-clone/actions).
+- [unit, functional test codes link using jest](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/tests)
+- [e2e test codes link using cypress](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/cypress/e2e)
 
 <hr/>
 
@@ -152,11 +155,11 @@ git flow init
 
 - All components in the `src/components/**Page.jsx` format
 
-#### Container Components `src/containers`
+#### Container Components `src/containers` [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/containers)
 
 - The container components connect business logic to UI components.
 
-#### Model Classes `src/models`
+#### Model Classes `src/models` [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/models)
 
 - `itemNamesMapp` is for `UI` converting `keys` into `spanish matched terms`.
 - `ProductCore` is for `item` for `products`.
@@ -169,13 +172,26 @@ git flow init
 ### Business logics
 
 - All component files in `src/containers` directory are for connecting business logics to UI components.
+  - [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/containers)
 - All input control hooks are in `src/hooks`: search and add to cart based on options.
+  - [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/hooks)
 
 ### State Management
+
+> #### code link
+>
+> [sagas, actions](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/actions)
+>
+> - [tests](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/tests/sagas)
+>
+> [stores, reducers, provider](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/stores)
+>
+> - [tests](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/tests/reducers)
 
 #### App - `Persistent store` using `Session Storage`
 
 - Every fetched data is saved in the app state.
+- In the `app saga`, the cached data will be deleted after 1 hour.
 
 #### ProductList
 
@@ -191,8 +207,19 @@ git flow init
 
 #### Cart - `Persistent store` using `Local Storage`
 
+- The total count of cart is saved in the persistent store using `local storage`.
+- After receiving the response of `/api/cart`, the data is applied in the reducer.
+
+#### The storage test is conducted in `cypress`, [code link is here](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/cypress/e2e/app.spec.cy.js)
+
 <hr />
 
 ### Retrospection
 
-It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
+> It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
+
+> Fue primera vez aplicar TDD, aunque ya tenía experiencia de pruebas. En mi opinión, la mejor inconveniente es tardar mucho tiempo; en cambio, la mejor ventana es prohibir errores que no se pueda tener en cuenta.
+
+> Because it was not allowed using `typescript` in this project, I need to understand the difference between `ES5` and `ES6` deeply.
+
+> Como usar `typescript` estaba prohibido, tenía que tener la diferencia entre `ES5` y `ES6`en cuenta profundamente.
