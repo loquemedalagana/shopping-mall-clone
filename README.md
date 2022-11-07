@@ -59,11 +59,15 @@ git flow init
 
 - to show product detail page
 
+`/error`
+
+- redirected route when an error occurs
+
 <hr/>
 
 ## Deployment
 
-- This app is deployed automatically in `netlify` when `master` branch is updated.
+- This app is deployed **automatically** in `netlify` when `master` branch is updated.
 - [current version is here](https://frolicking-moonbeam-50949b.netlify.app)
 
 ### release history
@@ -77,6 +81,7 @@ git flow init
 - [show product count](https://github.com/loquemedalagana/shopping-mall-clone/commit/5846d0ba78a9d20ac009518b38d00bb3888ea012)
 - [add search based on model](https://github.com/loquemedalagana/shopping-mall-clone/pull/16/files)
 - [add search input reset feature](https://github.com/loquemedalagana/shopping-mall-clone/pull/17/files)
+- [incorporate storage management codes into persistent store](https://github.com/loquemedalagana/shopping-mall-clone/pull/25)
 
 <hr />
 
@@ -89,6 +94,8 @@ git flow init
 #### Search
 
 - All search options like `brand`, `model name`, `price` will be shown.
+- When inputs are changed, the search result will be shown.
+- Every search input is autocompleted.
 
 #### Add to cart - `local storage`
 
@@ -128,6 +135,7 @@ git flow init
 - `src/components/header/ProductDetailActions`
 - `src/components/product-list/ProductListItem`
 - `src/components/search/SearchSection`
+  - The position of this component is controlled by `throttle` for optimization.
 - `src/components/error/ErrorElement`
 
 #### Organism Components
@@ -144,9 +152,17 @@ git flow init
 
 - All components in the `src/components/**Page.jsx` format
 
-#### Container Components
+#### Container Components `src/containers`
 
 - The container components connect business logic to UI components.
+
+#### Model Classes `src/models`
+
+- `itemNamesMapp` is for `UI` converting `keys` into `spanish matched terms`.
+- `ProductCore` is for `item` for `products`.
+- `ProductListData` is for `fetched product list data`, `fetched time`, `checking is expired method`.
+- `ProductDetail` is for `product detail data` to be shown in `product detail page`.
+- `ProductDetailData` is to save `product detail data` and `fetched time`, `checking is expired method`.
 
 <hr />
 
@@ -159,12 +175,21 @@ git flow init
 
 #### App - `Persistent store` using `Session Storage`
 
+- Every fetched data is saved in the app state.
+
 #### ProductList
+
+- Unlike `App State`, the `data` in this state is to be shown in `UI`.
+- Applied `pagination` using `infinite scroll` using `page`, `isReachedEnd` property.
+- Search inputs will be saved in `searchKeyword` property.
+- `isUpdating` property resets `page` and `data` to show `search results`.
 
 #### ProductDetail
 
-#### Cart - `Persistent store` using `Local Storage`
+- This state is relatively simple unlike other states.
+- In the saga, data is loaded from `App State`, if the data doesn't exist, the fetching function will be called.
 
+#### Cart - `Persistent store` using `Local Storage`
 
 <hr />
 
