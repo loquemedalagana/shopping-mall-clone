@@ -21,10 +21,10 @@ const CartCount = () => {
   const errorMessage = 'error';
 
   return (
-    <CartCountBox>
+    <CartCountBox id="total-count-of-products__in-the-cart">
       <p>el número de productos:</p>
       {cartState.loading && <MiniSpinner />}
-      {!cartState.loading && (cartState.error ? <p>{errorMessage}</p> : <p>{cartState.count}</p>)}
+      {!cartState.loading && (cartState.error ? <p>{errorMessage}</p> : <p className="total-count-of-products">{cartState.count}</p>)}
     </CartCountBox>
   );
 };

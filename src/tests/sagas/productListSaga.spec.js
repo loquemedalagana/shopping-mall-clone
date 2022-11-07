@@ -5,21 +5,24 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 
 import { restApiProductList } from 'src/http/api';
 import * as actions from 'src/actions/productListActions';
-import mockedItemList, { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
+import { mockedItemList } from 'src/tests/__mocks__/mockedFetchedData';
+import mockedAppState from 'src/tests/__mocks__/mockedAppState';
+import { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
 import {
   loadProductList,
   searchProductModel,
   searchProductPrice,
   searchProductBrand,
 } from 'src/actions/productListSaga';
+import { selectAppState, initialState as appInitialState } from 'src/stores/appStore';
 import { initialState, PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/productListStore';
 
 describe('product list saga test', () => {
-  const sampleError = new Error('some error occurred');
-
   it('fetching character list saga is failed', async () => {
+    const sampleError = new Error('some error occurred');
     const res = await expectSaga(loadProductList)
       .provide([
+        [select(selectAppState), appInitialState],
         [
           select(selectProductListState),
           {
@@ -36,6 +39,7 @@ describe('product list saga test', () => {
   it('fetching character list saga is success before loding search options', async () => {
     const res = await expectSaga(loadProductList)
       .provide([
+        [select(selectAppState), mockedAppState],
         [
           select(selectProductListState),
           {
@@ -53,6 +57,7 @@ describe('product list saga test', () => {
   it('fetching character list saga is success after loading search options', async () => {
     const res = await expectSaga(loadProductList)
       .provide([
+        [select(selectAppState), mockedAppState],
         [
           select(selectProductListState),
           {

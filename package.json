@@ -20,6 +20,7 @@
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.1",
     "web-vitals": "^2.1.4"
   },
@@ -49,6 +50,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.18.9",
     "cypress": "^10.11.0",
     "cypress-if": "^1.10.1",
     "eslint": "^7.32.0 || ^8.2.0",

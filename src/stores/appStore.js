@@ -1,9 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { saveErrorMessage, resetErrorMessage } from 'src/actions/appActions';
+import {
+  removeCachedProductDetailData,
+  cacheProductList,
+  cacheProductDetail,
+  removeCachedDataError,
+  removeCachedProductListData,
+} from 'src/actions/appActions';
+import ProductListData from 'src/models/ProductListData';
+import ProductDetailData from 'src/models/ProductDetailData';
+import { ONE_HOUR } from 'src/models/constants';
+import { isTest } from 'src/env';
 
 export const initialState = {
   error: null,
+  productList: null,
+  productDetail: [],
 };
 
 const appSlice = createSlice({
@@ -12,16 +24,41 @@ const appSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(saveErrorMessage, (state, action) => {
+      .addCase(removeCachedProductListData, state => {
+        return {
+          ...state,
+          productList: null,
+        };
+      })
+      .addCase(removeCachedProductDetailData, (state, action) => {
+        return {
+          ...state,
+          productDetail: state.productDetail.filter(data => data.data.id !== action.payload.productId),
+        };
+      })
+      .addCase(removeCachedDataError, (state, action) => {
         return {
           ...state,
           error: action.payload.error,
         };
       })
-      .addCase(resetErrorMessage, state => {
+      .addCase(cacheProductList, (state, action) => {
+        const currentTime = new Date();
+        const expiredTimeForTest = new Date(new Date().getTime() - (ONE_HOUR + 10));
         return {
           ...state,
-          error: null,
+          productList: new ProductListData(action.payload.productList, isTest() ? expiredTimeForTest : currentTime),
+        };
+      })
+      .addCase(cacheProductDetail, (state, action) => {
+        const currentTime = new Date();
+        const expiredTimeForTest = new Date(new Date().getTime() - (ONE_HOUR + 10));
+        return {
+          ...state,
+          productDetail: [
+            ...state.productDetail,
+            new ProductDetailData(action.payload.productDetail, isTest() ? expiredTimeForTest : currentTime),
+          ],
         };
       })
       .addDefaultCase(state => {
