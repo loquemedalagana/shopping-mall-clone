@@ -1,10 +1,11 @@
 import * as actions from 'src/actions/appActions';
 import { appReducer, initialState } from 'src/stores/appStore';
 import ProductDetail from 'src/models/ProductDetail';
-import mockedAppState from 'src/tests/__mocks__/mockedAppState';
+import getMockedAppState from 'src/tests/__mocks__/getMockedAppState';
 import mockedFetchedState, { mockedItemDetail } from 'src/tests/__mocks__/mockedFetchedData';
 
 describe('app reducer test', () => {
+  const mockedAppState = getMockedAppState();
   it('should return initial state', () => {
     expect(appReducer(undefined, { type: undefined })).toEqual(initialState);
   });
