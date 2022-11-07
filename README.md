@@ -153,7 +153,7 @@ git flow init
 
 ### State Management
 
-#### App
+#### App - `Persistent store` using `Session Storage`
 
 #### ProductList
 
@@ -164,11 +164,6 @@ git flow init
 - 백앤드에서 토큰을 내려 줘야 accumulated된 값을 저장할 수 있는데, 그게 아니라서 어쩔 수 없이... 로컬스토리지를 이용, withcridential true.. cookie value [Link is here](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/src/stores/cartStore.js)
 
 <hr />
-
-### 남은 기능
-
-- app saga에서 만료된 데이터 지우기
-- 정렬??
 
 ### Retrospection
 
