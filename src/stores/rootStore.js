@@ -1,5 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import storageSession from 'redux-persist/lib/storage/session';
 
 import { isTest, isDev } from 'src/env';
 import { appReducer } from 'src/stores/appStore';
@@ -10,8 +13,13 @@ import rootSaga from 'src/actions/rootSaga';
 
 const sagaMiddleWare = createSagaMiddleware();
 
+const appPersistentConfig = {
+  key: 'app',
+  storage: storageSession,
+};
+
 const rootReducer = combineReducers({
-  app: appReducer,
+  app: persistReducer(appPersistentConfig, appReducer),
   productList: productListReducer,
   productDetail: productDetailReducer,
   cart: cartReducer,
