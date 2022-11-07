@@ -1,17 +1,37 @@
 /* eslint-disable no-plusplus */
-import { all, fork, take, takeEvery, takeLatest, select } from 'redux-saga/effects';
+/* eslint-disable no-continue */
+import { all, fork, takeEvery, select, put } from 'redux-saga/effects';
 
 import * as actions from 'src/actions/appActions';
+import ProductListData from 'src/models/ProductListData';
+import ProductDetailData from 'src/models/ProductDetailData';
 import { selectAppState } from 'src/stores/appStore';
 
-export function* readCachedProductListData() {
-  yield;
+export function* readProductDetail({ data, fetchedTime }) {
+  const currentProductDetailState = new ProductDetailData(data, fetchedTime);
+  if (currentProductDetailState.isExpired()) {
+    yield put(actions.removeCachedProductDetailData(data.id));
+  }
+}
+
+export function* readProductList({ data, fetchedTime }) {
+  const currentProductListState = new ProductListData(data, fetchedTime);
+  if (currentProductListState.isExpired()) {
+    yield put(actions.removeCachedProductListData());
+  }
 }
 
 export function* readCachedData() {
-  while(true) {
+  while (true) {
     const currentAppState = yield select(selectAppState);
-    // console.log(currentAppState.productList?.fetchedTime);
+
+    for (let i = 0; i < currentAppState.productDetail.length; i++) {
+      yield readProductDetail(currentAppState.productDetail[i]);
+    }
+
+    if (currentAppState?.productList) {
+      yield readProductList(currentAppState.productList);
+    }
   }
 }
 
@@ -20,5 +40,5 @@ export function* watchReadCachedProductDetailData() {
 }
 
 export default function* rootAppSaga() {
-  yield all([ fork(watchReadCachedProductDetailData)]);
+  yield all([fork(watchReadCachedProductDetailData)]);
 }

@@ -6,7 +6,7 @@ import ProductCore from 'src/models/ProductCore';
 class ProductListData {
   constructor(args, fetchedTime) {
     this.data = args.map(data => new ProductCore(data));
-    this.fetchedTime = fetchedTime;
+    this.fetchedTime = new Date(fetchedTime);
   }
 
   isExpired() {
