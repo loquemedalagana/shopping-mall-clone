@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
+  readCachedData,
   removeCachedProductDetailData,
   cacheProductList,
   cacheProductDetail,
