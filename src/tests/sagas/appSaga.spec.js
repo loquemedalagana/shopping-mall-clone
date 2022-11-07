@@ -1,21 +1,24 @@
 import { all, take, fork } from 'redux-saga/effects';
 
 import * as appActions from 'src/actions/appActions';
-import rootAppSaga from 'src/actions/appSaga';
+import { readCachedData } from 'src/actions/appSaga';
+import { saveFetchedProductDetailData } from 'src/models/ProductDetailData';
+import { mockedItemDetail, mockedItemDetail2 } from 'src/tests/__mocks__/mockedFetchedData';
+import { createMockSessionStorage } from 'src/tests/__mocks__/mockStorage';
 
 describe('to test app saga', () => {
+  beforeEach(() => {
+    createMockSessionStorage({});
+    saveFetchedProductDetailData(mockedItemDetail);
+    saveFetchedProductDetailData(mockedItemDetail2);
+  });
+
   it('to test root saga', () => {
     // const rootGen = rootAppSaga();
     // expect(rootGen.next().value).toEqual(all([fork(saveErrorMessage), fork(resetErrorMessage)]));
   });
 
-  it('to test save error saga', () => {
-    // const saveErrorGen = saveErrorMessage();
-    // expect(saveErrorGen.next().value).toEqual(take(appActions.SAVE__ERROR_MESSAGE));
-  });
-
-  it('to test reset error saga', () => {
-    // const resetErrorGen = resetErrorMessage();
-    // expect(resetErrorGen.next().value).toEqual(take(appActions.RESET__ERROR_MESSAGE));
+  afterEach(() => {
+    sessionStorage.clear();
   });
 });
