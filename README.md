@@ -82,11 +82,17 @@ git flow init
 
 ### Main features
 
-#### Load Data - `session storage`
+#### Load Data
+
+- All fetched data, `product list` and `product detail` are cached in `App State` using `Session Storage`.
 
 #### Search
 
+- All search options like `brand`, `model name`, `price` will be shown.
+
 #### Add to cart - `local storage`
+
+- `Add to cart` feature in the `product detail page`, and the count in the cart is always shown in the header.
 
 <hr />
 
@@ -101,8 +107,6 @@ git flow init
 <hr/>
 
 ## Project Structure
-
-- This will be available after the release of 1.0
 
 ### UI
 
@@ -159,9 +163,8 @@ git flow init
 
 #### ProductDetail
 
-#### Cart
+#### Cart - `Persistent store` using `Local Storage`
 
-- 백앤드에서 토큰을 내려 줘야 accumulated된 값을 저장할 수 있는데, 그게 아니라서 어쩔 수 없이... 로컬스토리지를 이용, withcridential true.. cookie value [Link is here](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/src/stores/cartStore.js)
 
 <hr />
 
