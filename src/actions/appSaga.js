@@ -1,15 +1,24 @@
-import { all, fork, take } from 'redux-saga/effects';
+/* eslint-disable no-plusplus */
+import { all, fork, take, takeEvery, takeLatest } from 'redux-saga/effects';
 
-import { SAVE__ERROR_MESSAGE, RESET__ERROR_MESSAGE } from 'src/actions/appActions';
+import * as actions from 'src/actions/appActions';
 
-export function* saveErrorMessage() {
-  yield take(SAVE__ERROR_MESSAGE);
+export function* readCachedProductListData() {
+  yield;
 }
 
-export function* resetErrorMessage() {
-  yield take(RESET__ERROR_MESSAGE);
+export function* readCachedProductDetailData() {
+  yield;
+}
+
+export function* watchReadCachedProductListData() {
+  yield takeEvery(actions.READ__CACHED_PRODUCT_LIST_DATA, readCachedProductListData);
+}
+
+export function* watchReadCachedProductDetailData() {
+  yield takeEvery(actions.READ__CACHED_PRODUCT_DETAIL_DATA, readCachedProductDetailData);
 }
 
 export default function* rootAppSaga() {
-  yield all([]);
+  yield all([fork(watchReadCachedProductListData), fork(watchReadCachedProductDetailData)]);
 }

@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import App from 'src/App';
+import App, { router } from 'src/App';
 import reportWebVitals from 'src/reportWebVitals';
 
 import rootStore from 'src/stores/rootStore';
+import { ThemeProvider } from '@mui/material';
+
+import MuiTheme from 'src/styles/theme';
+import AppProvider from 'src/stores/AppProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+  <ThemeProvider theme={MuiTheme}>
+    <AppProvider>
+      <App />
+    </AppProvider>
+  </ThemeProvider>,
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
