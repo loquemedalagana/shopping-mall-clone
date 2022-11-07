@@ -55,7 +55,7 @@ git flow init
 - to show product list
 - DO NOT reset search inputs
 
-`/:productId`
+`/products/:productId`
 
 - to show product detail page
 
@@ -97,6 +97,7 @@ git flow init
 - All search options like `brand`, `model name`, `price` will be shown.
 - When inputs are changed, the search result will be shown.
 - Every search input is autocompleted.
+- To reset search input, `Home` in the `breadcrumbs` in the `header` should be clicked. [code](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/src/containers/LandingContainer.jsx)
 
 #### Add to cart - `local storage`
 
@@ -138,8 +139,9 @@ git flow init
 - `src/components/header/ProductDetailActions`
 - `src/components/product-list/ProductListItem`
 - `src/components/search/SearchSection`
-  - The position of this component is controlled by `throttle` for optimization.
+  - The position of this component is controlled by `throttle` for optimization. [code](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/src/components/search/SearchSection.jsx#L40)
 - `src/components/error/ErrorElement`
+  - To show partial error: eg. `search fail state`.
 
 #### Organism Components
 
@@ -172,13 +174,21 @@ git flow init
 ### Business logics
 
 - All component files in `src/containers` directory are for connecting business logics to UI components.
-  - [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/containers)
 - All input control hooks are in `src/hooks`: search and add to cart based on options.
-  - [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/hooks)
+
+#### Custom Hooks `src/hooks` [code link](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/hooks)
+
+- `useAddProductController`
+  - to control `select option input` to be in `request body` in the `POST request`.
+  - to dispatch `POST request action`.
+- `useSearchController`
+  - to control `all inputs` related with `search` feature: `brand`, `model`, `price range`.
+  - to communicate `UI state` with `central state`.
+  - to show `error state` changing `input UI color` when the inputs are invalid.
 
 ### State Management
 
-> #### code link
+> #### code links
 >
 > [sagas, actions](https://github.com/loquemedalagana/shopping-mall-clone/tree/develop/src/actions)
 >
@@ -216,10 +226,10 @@ git flow init
 
 ### Retrospection
 
-> It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
+> It is the first time for me to apply `TDD`, although I already had experiences of testing. The main advantage of `TDD` is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
 
-> Fue primera vez aplicar TDD, aunque ya tenía experiencia de pruebas. En mi opinión, la mejor inconveniente es tardar mucho tiempo; en cambio, la mejor ventana es prohibir errores que no se pueda tener en cuenta.
+> Fue primera vez aplicar `TDD`, aunque ya tenía experiencia de pruebas. En mi opinión, la mejor inconveniente es tardar mucho tiempo; en cambio, la mejor ventana es prohibir errores que no se pueda tener en cuenta.
 
-> Because it was not allowed using `typescript` in this project, I need to understand the difference between `ES5` and `ES6` deeply.
+> Because it was not allowed using `typescript` in this project, I need to understand the difference between `ES5` and `ES6` deeply. In addition, I used `PropTypes` library alternatively, and `prepareAction` function when calling `createAction`, a `built-in` function in `redux`.
 
-> Como usar `typescript` estaba prohibido, tenía que tener la diferencia entre `ES5` y `ES6`en cuenta profundamente.
+> Como usar `typescript` estaba prohibido, tenía que tener la diferencia entre `ES5` y `ES6`en cuenta profundamente. Además, utilicé `PropTypes` alternativamente, y `prepareAction` función al llamar `createAction`, una `built-in` función de `redux`.
