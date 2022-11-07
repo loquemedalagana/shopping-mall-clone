@@ -9,19 +9,19 @@ import { selectAppState } from 'src/stores/appStore';
 export function* loadProductDetail() {
   const productDetailState = yield select(selectProductDetailState);
   const appState = yield select(selectAppState);
-  const productDetailDataFromStore = appState.productDetail.filter(
+  const productDetailDataFromAppState = appState.productDetail.filter(
     productDetailData => productDetailData.data.id === productDetailState.productId,
   )[0];
 
   try {
-    if (!productDetailDataFromStore || productDetailDataFromStore.isExpired()) {
+    if (!productDetailDataFromAppState) {
       const data = yield call(restApiProductDetail, productDetailState.productId);
       yield put(appActions.cacheProductDetail(data));
       yield put(productDetailActions.loadProductDetailSuccess(data));
       return;
     }
 
-    yield put(productDetailActions.loadProductDetailSuccess(productDetailDataFromStore?.data));
+    yield put(productDetailActions.loadProductDetailSuccess(productDetailDataFromAppState?.data));
   } catch (e) {
     yield put(productDetailActions.loadProductDetailFail(e));
   }
