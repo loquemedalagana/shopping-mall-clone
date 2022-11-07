@@ -12,4 +12,11 @@ describe('visit routes', () => {
   it('check breadcrumbs links function', () => {
     cy.get('nav').contains(/home/i);
   });
+
+
+  it('check session storage', () => {
+    cy.window()
+      .its('sessionStorage')
+      .invoke('getItem', 'persist.app')
+  });
 });
