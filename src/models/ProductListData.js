@@ -2,7 +2,6 @@
 /* eslint-disable no-continue */
 import { ONE_HOUR } from 'src/models/constants';
 import ProductCore from 'src/models/ProductCore';
-import { APP__PRODUCT_LIST_KEY, APP_KEY, isTest } from 'src/env';
 
 class ProductListData {
   constructor(args, fetchedTime) {

@@ -2,7 +2,6 @@
 import 'cypress-if';
 
 import { URL_PRODUCTS, URL_ROOT } from '../../src/routes/routeURL';
-import { APP_KEY, APP__CART_COUNT_KEY } from '../../src/env';
 import { mockedItemDetail } from '../../src/tests/__mocks__/mockedFetchedData';
 import {
   CLASSNAME__TOTAL_COUNT_OF_PROTUCTS__IN_CART,
@@ -21,10 +20,6 @@ describe('e2e test for product detail page', () => {
   it('to visit the product detail', () => {
     cy.visit(`${URL_ROOT + URL_PRODUCTS}/${sampleId}`);
     cy.wait(2000);
-  });
-
-  it('check session storage', () => {
-    cy.window().its('sessionStorage').invoke('getItem', sampleId).should('include', JSON.stringify(mockedItemDetail));
   });
 
   it('should add a cart', () => {

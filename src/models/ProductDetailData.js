@@ -1,4 +1,3 @@
-import { APP_KEY, isTest, APP__CART_COUNT_KEY } from 'src/env';
 import ProductDetail from 'src/models/ProductDetail';
 import { ONE_HOUR } from 'src/models/constants';
 
