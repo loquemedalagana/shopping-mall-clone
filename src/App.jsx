@@ -10,7 +10,8 @@ export const router = createBrowserRouter(routes);
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(actions.readCachedData());
+    dispatch(actions.readCachedProductListData());
+    dispatch(actions.readCachedProductDetailData());
   }, []);
 
   return <RouterProvider router={router} />;

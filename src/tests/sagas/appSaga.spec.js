@@ -1,12 +1,13 @@
 import { all, take, fork } from 'redux-saga/effects';
 
 import * as appActions from 'src/actions/appActions';
-import { readCachedData } from 'src/actions/appSaga';
+import { readCachedProductDetailData } from 'src/actions/appSaga';
 import { mockedItemDetail, mockedItemDetail2 } from 'src/tests/__mocks__/mockedFetchedData';
-import { createMockSessionStorage } from 'src/tests/__mocks__/mockStorage';
+import { createMockSessionStorage, createMockLocalStorage } from 'src/tests/__mocks__/mockStorage';
 
 describe('to test app saga', () => {
   beforeEach(() => {
+    createMockLocalStorage({});
     createMockSessionStorage({});
   });
 
@@ -17,5 +18,6 @@ describe('to test app saga', () => {
 
   afterEach(() => {
     sessionStorage.clear();
+    localStorage.clear();
   });
 });

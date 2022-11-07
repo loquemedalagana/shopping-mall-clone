@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { readCachedData, removeCachedData, cacheProductList, cacheProductDetail } from 'src/actions/appActions';
+import {
+  readCachedProductDetailData,
+  removeCachedProductDetailData,
+  cacheProductList,
+  cacheProductDetail,
+  removeCachedDataError,
+  removeCachedProductListData,
+} from 'src/actions/appActions';
 import ProductListData from 'src/models/ProductListData';
 import ProductDetailData from 'src/models/ProductDetailData';
 import { ONE_HOUR } from 'src/models/constants';
@@ -18,6 +25,24 @@ const appSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(removeCachedProductListData, state => {
+        return {
+          ...state,
+          productList: null,
+        };
+      })
+      .addCase(removeCachedProductDetailData, (state, action) => {
+        return {
+          ...state,
+          productDetail: state.productDetail.filter(data => data.data.id !== action.payload.productId),
+        };
+      })
+      .addCase(removeCachedDataError, (state, action) => {
+        return {
+          ...state,
+          error: action.payload.error,
+        };
+      })
       .addCase(cacheProductList, (state, action) => {
         const currentTime = new Date();
         const expiredTimeForTest = new Date(new Date().getTime() - (ONE_HOUR + 10));
