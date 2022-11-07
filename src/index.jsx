@@ -8,14 +8,14 @@ import rootStore from 'src/stores/rootStore';
 import { ThemeProvider } from '@mui/material';
 
 import MuiTheme from 'src/styles/theme';
-import { Provider as ReduxProvider } from 'react-redux/es/exports';
+import AppProvider from 'src/stores/AppProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider theme={MuiTheme}>
-    <ReduxProvider store={rootStore}>
+    <AppProvider>
       <App />
-    </ReduxProvider>
+    </AppProvider>
   </ThemeProvider>,
 );
 
