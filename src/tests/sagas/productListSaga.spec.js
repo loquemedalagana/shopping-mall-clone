@@ -6,7 +6,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { restApiProductList } from 'src/http/api';
 import * as actions from 'src/actions/productListActions';
 import { mockedItemList } from 'src/tests/__mocks__/mockedFetchedData';
-import mockedAppState from 'src/tests/__mocks__/mockedAppState';
+import getMockedAppState from 'src/tests/__mocks__/getMockedAppState';
 import { definedMockedItemList, mockedListOptions } from 'src/tests/__mocks__/mockedItemList';
 import {
   loadProductList,
@@ -18,6 +18,7 @@ import { selectAppState, initialState as appInitialState } from 'src/stores/appS
 import { initialState, PRODUCTS_COUNT__PER_PAGE, selectProductListState } from 'src/stores/productListStore';
 
 describe('product list saga test', () => {
+  const mockedAppState = getMockedAppState();
   it('fetching character list saga is failed', async () => {
     const sampleError = new Error('some error occurred');
     const res = await expectSaga(loadProductList)
