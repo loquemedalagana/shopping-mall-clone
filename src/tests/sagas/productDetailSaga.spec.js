@@ -7,8 +7,9 @@ import { restApiProductDetail } from 'src/http/api';
 import * as actions from 'src/actions/productDetailActions';
 import { mockedItemDetail } from 'src/tests/__mocks__/mockedFetchedData';
 import { definedMockedItemDetail } from 'src/tests/__mocks__/mockedItemDetail';
+import mockedAppState from 'src/tests/__mocks__/mockedAppState';
 import { loadProductDetail } from 'src/actions/productDetailSaga';
-
+import { selectAppState, initialState as initialAppState } from 'src/stores/appStore';
 import { initialState, selectProductDetailState } from 'src/stores/productDetailStore';
 
 describe('product detail test', () => {
@@ -17,6 +18,7 @@ describe('product detail test', () => {
   it('should catch error if fails', async () => {
     const res = await expectSaga(loadProductDetail)
       .provide([
+        [select(selectAppState), initialAppState],
         [
           select(selectProductDetailState),
           {
@@ -34,6 +36,7 @@ describe('product detail test', () => {
   it('should receive data if success', async () => {
     const res = await expectSaga(loadProductDetail)
       .provide([
+        [select(selectAppState), mockedAppState],
         [
           select(selectProductDetailState),
           {
