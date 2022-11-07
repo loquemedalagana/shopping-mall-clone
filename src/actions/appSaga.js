@@ -6,6 +6,7 @@ import * as actions from 'src/actions/appActions';
 import ProductListData from 'src/models/ProductListData';
 import ProductDetailData from 'src/models/ProductDetailData';
 import { selectAppState } from 'src/stores/appStore';
+import { isTest } from 'src/env';
 
 export function* readProductDetail({ data, fetchedTime }) {
   const currentProductDetailState = new ProductDetailData(data, fetchedTime);
@@ -22,7 +23,7 @@ export function* readProductList({ data, fetchedTime }) {
 }
 
 export function* readCachedData() {
-  while (true) {
+  while (!isTest()) {
     const currentAppState = yield select(selectAppState);
 
     for (let i = 0; i < currentAppState.productDetail.length; i++) {
