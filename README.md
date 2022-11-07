@@ -216,4 +216,10 @@ git flow init
 
 ### Retrospection
 
-It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
+> It is the first time for me to apply TDD, although I already had experiences of testing. The main advantage of TDD is reducing the mistakes, whereas the main disadvantage of this method is taking too much time.
+
+> Fue primera vez aplicar TDD, aunque ya tenía experiencia de pruebas. En mi opinión, la mejor inconveniente es tardar mucho tiempo; en cambio, la mejor ventana es prohibir errores que no se pueda tener en cuenta.
+
+> Because it was not allowed using `typescript` in this project, I need to understand the difference between `ES5` and `ES6` deeply.
+
+> Como usar `typescript` estaba prohibido, tenía que tener la diferencia entre `ES5` y `ES6`en cuenta profundamente.
