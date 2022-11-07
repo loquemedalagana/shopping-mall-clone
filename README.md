@@ -23,13 +23,13 @@ yarn cypress
 yarn test
 ```
 
-# to build
+### to build
 
 ```bash
 yarn build
 ```
 
-### # git flow
+### git flow
 
 ```bash
 git flow init
@@ -82,6 +82,7 @@ git flow init
 - [add search based on model](https://github.com/loquemedalagana/shopping-mall-clone/pull/16/files)
 - [add search input reset feature](https://github.com/loquemedalagana/shopping-mall-clone/pull/17/files)
 - [incorporate storage management codes into persistent store](https://github.com/loquemedalagana/shopping-mall-clone/pull/25)
+- [add cache management](https://github.com/loquemedalagana/shopping-mall-clone/pull/27)
 
 <hr />
 
@@ -205,6 +206,11 @@ git flow init
 - In the saga, data is loaded from `App State`, if the data doesn't exist, the fetching function will be called.
 
 #### Cart - `Persistent store` using `Local Storage`
+
+- The total count of cart is saved in the persistent store using `local storage`.
+- After receiving the response of `/api/cart`, the data is applied in the reducer.
+
+#### The storage test is conducted in `cypress`, [code link is here](https://github.com/loquemedalagana/shopping-mall-clone/blob/develop/cypress/e2e/app.spec.cy.js)
 
 <hr />
 
