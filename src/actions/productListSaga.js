@@ -18,33 +18,33 @@ export function* setSearchInputError() {
 
 export function* loadProductList() {
   const appState = yield select(selectAppState);
-  let productListDataFromStorage = appState.productList;
+  let productListDataFromAppState = appState.productList;
   const productListState = yield select(selectProductListState);
 
   if (
     productListState.data &&
-    productListDataFromStorage?.data &&
-    productListState.data.length === productListDataFromStorage.data.length
+    productListDataFromAppState?.data &&
+    productListState.data.length === productListDataFromAppState.data.length
   ) {
     put(productListActions.getReachedEnd());
   }
 
   try {
-    if (!productListDataFromStorage || productListDataFromStorage.isExpired()) {
+    if (!productListDataFromAppState.productList) {
       const data = yield call(restApiProductList);
       yield put(appActions.cacheProductList(data));
-      productListDataFromStorage = new ProductListData(data, new Date());
+      productListDataFromAppState = new ProductListData(data, new Date());
     }
 
     const { page, searchOptions, searchKeyword } = productListState;
 
     if (!searchOptions) {
-      yield put(productListActions.loadSearchOptions(productListDataFromStorage.getOptionsList()));
+      yield put(productListActions.loadSearchOptions(productListDataFromAppState.getOptionsList()));
     }
 
     let productListData = isTest()
-      ? productListDataFromStorage.data
-      : getFilterDataByPrice(productListDataFromStorage.data, searchKeyword.price);
+      ? productListDataFromAppState.data
+      : getFilterDataByPrice(productListDataFromAppState.data, searchKeyword.price);
 
     if (searchKeyword.brand) {
       const reg = new RegExp(searchKeyword.brand, 'i');
