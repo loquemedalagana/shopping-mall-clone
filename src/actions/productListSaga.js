@@ -30,7 +30,7 @@ export function* loadProductList() {
   }
 
   try {
-    if (!productListDataFromAppState.productList) {
+    if (!productListDataFromAppState?.productList) {
       const data = yield call(restApiProductList);
       yield put(appActions.cacheProductList(data));
       productListDataFromAppState = new ProductListData(data, new Date());

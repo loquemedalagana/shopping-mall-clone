@@ -9,9 +9,9 @@ import { selectAppState } from 'src/stores/appStore';
 export function* loadProductDetail() {
   const productDetailState = yield select(selectProductDetailState);
   const appState = yield select(selectAppState);
-  const productDetailDataFromAppState = appState.productDetail.filter(
+  const [productDetailDataFromAppState] = appState.productDetail.filter(
     productDetailData => productDetailData.data.id === productDetailState.productId,
-  )[0];
+  );
 
   try {
     if (!productDetailDataFromAppState) {
