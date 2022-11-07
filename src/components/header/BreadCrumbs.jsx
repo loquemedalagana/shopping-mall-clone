@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
@@ -27,9 +27,7 @@ const BreadCrumbs = () => {
 
           return lastIndex ? (
             <Typography color="#277BC0" key={to}>
-              {productDetailState?.data && currentValue === productDetailState.data.id
-                ? productDetailState.data.model
-                : currentValue}
+              {productDetailState?.data && pathnames.length > 1 ? productDetailState?.data?.model : currentValue}
             </Typography>
           ) : (
             <LinkRouter underline="hover" color="inherit" to={to} key={to}>

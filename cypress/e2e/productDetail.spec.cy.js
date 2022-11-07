@@ -43,6 +43,7 @@ describe('e2e test for product detail page', () => {
   });
 
   it(`check breadcrumbs links function and search`, () => {
+    cy.get('nav').contains(mockedItemDetail.model);
     cy.get('nav')
       .contains(/products/i)
       .click();
