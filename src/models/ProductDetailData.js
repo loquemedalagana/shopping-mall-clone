@@ -4,7 +4,7 @@ import { ONE_HOUR } from 'src/models/constants';
 class ProductDetailData {
   constructor(args, fetchedTime) {
     this.data = new ProductDetail(args);
-    this.fetchedTime = fetchedTime;
+    this.fetchedTime = new Date(fetchedTime);
   }
 
   isExpired() {
