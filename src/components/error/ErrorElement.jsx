@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import Button from '@mui/material/Button';
-
-// import { selectAppState } from 'src/stores/appStore';
 
 const ErrorTextBox = styled.div`
   display: flex;
@@ -24,7 +19,6 @@ const ErrorTextBox = styled.div`
 `;
 
 const ErrorElement = ({ is404 }) => {
-  // const appState = useSelector(selectAppState);
   let errorMessageComponent = <p>Algo salió mal..</p>;
 
   if (is404) {

@@ -32,19 +32,16 @@ const ProductListGridBox = styled.section`
   gap: 2rem;
   justify-content: center;
 
-  // tablet
   @media screen and (max-width: ${DEVICE_DESKTOP_WIDTH}px) {
     gap: 1.5rem;
     grid-template-columns: repeat(3, 1fr);
   }
 
-  // tablet
   @media screen and (max-width: ${DEVICE_TABLET_WIDTH}px) {
     gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  // mobile
   @media screen and (max-width: ${DEVICE_MOBILE_WIDTH}px) {
     grid-template-columns: 1fr;
   }
