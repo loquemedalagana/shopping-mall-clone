@@ -1,5 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-continue */
 import { all, fork, takeEvery, select, put } from 'redux-saga/effects';
 
 import * as actions from 'src/actions/appActions';

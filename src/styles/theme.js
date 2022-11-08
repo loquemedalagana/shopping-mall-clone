@@ -15,12 +15,10 @@ const MuiTheme = createTheme(
     },
     palette: {
       primary: {
-        // Purple and green play nicely together.
         main: '#87A2FB',
         contrastText: '#FFF5E4',
       },
       secondary: {
-        // This is green.A700 as hex.
         main: '#ECC5FB',
         contrastText: '#FFF5E4',
       },

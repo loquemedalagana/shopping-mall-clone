@@ -36,6 +36,9 @@ module.exports = {
     'cypress/no-force': 'warn',
     'cypress/no-async-tests': 'error',
     'cypress/no-pause': 'error',
+    'import/no-extraneous-dependencies': 'off',
+    'no-plusplus': 'off',
+    'no-continue': 'off',
   },
   settings: {
     'import/resolver': {

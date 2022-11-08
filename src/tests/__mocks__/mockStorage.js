@@ -1,17 +1,15 @@
-/* eslint-disable */
-
 export function createMockLocalStorage(storage) {
-  let localStorageMock = (function () {
+  const localStorageMock = (function () {
     let store = storage;
 
     return {
-      getItem: function (key) {
+      getItem(key) {
         return store[key] ?? null;
       },
-      setItem: function (key, value) {
+      setItem(key, value) {
         store[key] = value.toString();
       },
-      clear: function () {
+      clear() {
         store = {};
       },
     };
@@ -23,17 +21,17 @@ export function createMockLocalStorage(storage) {
 }
 
 export function createMockSessionStorage(storage) {
-  let sessionStorageMock = (function () {
+  const sessionStorageMock = (function () {
     let store = storage;
 
     return {
-      getItem: function (key) {
+      getItem(key) {
         return store[key] ?? null;
       },
-      setItem: function (key, value) {
+      setItem(key, value) {
         store[key] = value.toString();
       },
-      clear: function () {
+      clear() {
         store = {};
       },
     };
@@ -43,9 +41,3 @@ export function createMockSessionStorage(storage) {
     value: sessionStorageMock,
   });
 }
-
-// sample usage
-// createMockLocalStorage({ 'savedID': 'hello_world' });
-// createMockSessionStorage({ 'savedID': 'hello_world' });
-// in the first it('mocking storage..', function()...)
-// ref: https://github.com/facebook/jest/issues/2098

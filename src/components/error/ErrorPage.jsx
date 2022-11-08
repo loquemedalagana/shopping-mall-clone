@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
-
-// import { selectAppState } from 'src/stores/appStore';
 
 const ErrorPageBox = styled.div`
   display: flex;
@@ -32,7 +29,6 @@ const ErrorContentBox = styled.section`
 
 const ErrorPage = ({ is404 }) => {
   const navigate = useNavigate();
-  // const appState = useSelector(selectAppState);
 
   let errorMessageComponent = (
     <>

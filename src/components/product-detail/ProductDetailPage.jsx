@@ -22,19 +22,16 @@ const ProductDetailPageBox = styled.section`
   width: 100%;
   justify-content: space-evenly;
 
-  // tablet
   @media screen and (max-width: ${DEVICE_DESKTOP_WIDTH}px) {
     gap: 1.5rem;
     padding-top: 3rem;
   }
 
-  // tablet
   @media screen and (max-width: ${DEVICE_TABLET_WIDTH}px) {
     gap: 1rem;
     padding-top: 2rem;
   }
 
-  // mobile
   @media screen and (max-width: ${DEVICE_MOBILE_WIDTH}px) {
     flex-direction: column;
     padding-top: 1rem;
