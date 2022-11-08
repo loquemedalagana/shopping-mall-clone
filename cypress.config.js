@@ -1,11 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
+    setupNodeEvents(on, config) {},
   },
 });

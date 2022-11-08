@@ -2,7 +2,7 @@ import * as actions from 'src/actions/appActions';
 import { appReducer, initialState } from 'src/stores/appStore';
 import ProductDetail from 'src/models/ProductDetail';
 import getMockedAppState from 'src/tests/__mocks__/getMockedAppState';
-import mockedFetchedState, { mockedItemDetail } from 'src/tests/__mocks__/mockedFetchedData';
+import mockedFetchedState from 'src/tests/__mocks__/mockedFetchedData';
 
 describe('app reducer test', () => {
   const mockedAppState = getMockedAppState();

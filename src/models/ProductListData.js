@@ -1,5 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-continue */
 import { ONE_HOUR } from 'src/models/constants';
 import ProductCore from 'src/models/ProductCore';
 
